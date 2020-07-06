@@ -1,4 +1,4 @@
-<<!DOCTYPE html>
+<html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
@@ -9,12 +9,35 @@
         <title>Flipkart</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body>
-        <p>This is a sample application.</p>
-        <p> updated in repository</p>
+        <div><div style="display:inline-block;"><i onclick="inc()" id="heart1" class="fa fa-heart-o" style="font-size:24px"></i><i onclick="inc()" id="heart2" class="fa fa-heart" style="font-size:24px;color:red;"></i></div>
+        <div style="display:inline-block;"><span id="count">0</span></div></div>
         
-        <script src="" async defer></script>
+        <script>
+            var i=true;var j=true; //declaring 2 variables as true
+            var h1=document.getElementById('heart1');
+            var h2=document.getElementById('heart2');
+            h2.style.display="none";
+            var cnt=document.getElementById('count');
+            function inc(){ //when clicks thsi function will call
+                if(!j){i=true;j=true;} //checking when count-0 after first click at display and declaring i and j to true 
+                        if(i){
+                            //alert("cnt1"+i);
+                            h1.style.display="none";
+                            h2.style.display="block";
+                            cnt.innerHTML=1;
+                            } //checking when count=0
+                        if(!i){
+                            //alert("cnt2"+i);
+                            h2.style.display="none";
+                            h1.style.display="block";
+                            cnt.innerHTML=0;j=false;
+                            } //checkig when count=1
+
+                            i=false; //if count=0 declaring i as false
+                        }   
+        </script>
     </body>
-</html>>
+</html>
