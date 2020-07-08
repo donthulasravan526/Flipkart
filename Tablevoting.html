@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>voting</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script type="text/javascript" src="validation.js"></script>
+        <style>
+                h1{text-align: center;background-color: lightgreen;}
+                body{border: 1px solid black;margin: 1px 1px 50px 1px;font-family: Arial, Helvetica, sans-serif;}
+                ul{margin-left: 8%;}
+                table{text-align: center;}
+                img{width: 100px;}
+        </style>
+    </head>
+    <body>
+        <h1 style="text-align: center;">Voting</h1>
+        <h2 align="center" id="result">The winner is <span id="winner" style="color: green;"></span></h2>
+        <div id="main">
+        <h3><center>Instructions</center>
+            <ul>
+                <li>Please review the details below for each individual before voting</li>
+                <li>You can vote for only one individual, so please vote carefully</li>
+                <li>Please click the 'submit' button once after voting. If you want to clear your selections, please click on 'reset' button.</li>
+            </ul>
+        </h3>
+        <table border="2" align="center" width=80% style="border-collapse: collapse;">
+            <th width=70%>Details</th>
+            <th width=15%>Name</th>
+            <th width=15%>Vote</th>
+            <tr>
+                <td>Boianapalli Vinod Kumar was born on 22 July 1959. He is an Indian politician, advocate and Member of Parliament. He represents the Karimnagar constituency of Telangana State and previously represented Hanamkonda in the 14th Lok Sabha from 2004 to 2009). He is one of the founding members of the Telangana Rashtra Samithi (TRS) party and is presently a politburo member and the party's deputy Floor Leader in the Lok Sabha</td>
+                <td><img src="leaders/vinodkumar.jpg" /><br/><span class="name"><b>Vinod Kumar Boinapally</b></span><br/><span>TRS</span></td>
+                <td><input type="checkbox" class="check" id="a1"></td>
+            </tr>
+            <tr>
+                <td>Nara Lokesh is the son of former Chief Minister of Andhra Pradesh Chandrababu Naidu. He forayed into politics as a campaign Manager in 2009 and climbed up the ranks of induction as MLC and Cabinet minister for IT, Panchayati Raj and Rural Development. Lokesh graduated with an MBA from Stanford University Graduate School of Business and Bachelor of Science with specialization in Management Information Systems from Carnegie Mellon University.</td>
+                <td><img src="leaders/lokesh.jpg" /><br/><span class="name"><b>Nara Lokesh</b></span><br/><span>TDP</span></td>
+                <td><input type="checkbox" class="check" id="a2"></td>
+            </tr>
+            <tr>
+                <td>Kishan Reddy is a name not only heard in Indian political sphere but also resonates in international level as an active fighter against cross-border terrorism and as a child-friendly legislator. Born in remote village Thimmapur in Andhra Pradesh, He rose to the rank of national leader. At the age 11, He was elected as the president of his upper primary school. In his college days, He took the initiative to organize awareness programs that highlighted government apathy towards tackling terrorism and Conducted movements to highlight issues of the Blind and Physically challenged and advocated equal opportunities.</td>
+                <td><img src="leaders/kishan.jpg" /><br/><span class="name"><b>Gangapuram Kishan Reddy</b></span><br/><span>BJP</span></td>
+                <td><input type="checkbox" class="check" id="a3"></td>
+            </tr>
+            <tr><td colspan="3" style="text-align: center;height: 50px;"><button id="submit">Submit</button>&nbsp;&nbsp;<button id="reset">Reset</button></td></tr>
+        </table>
+    </div>
+        <br/><br/><br/>
+    </body>
+</html>
