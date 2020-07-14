@@ -18,39 +18,129 @@
                 ul{margin-left: 8%;}
                 table{text-align: center;}
                 img{width: 100px;}
+                .tel,.hin, #result{display:none;}
         </style>
     </head>
     <body>
-        <h1 style="text-align: center;">Voting</h1>
-        <h2 align="center" id="result">The winner is <span id="winner" style="color: green;"></span></h2>
+        <div id="lang" align="right">
+            <label>Language:&nbsp;&nbsp;</label>
+            <select name="lang" id="language">
+                <option value="0" style="cursor:none;">English</option>
+                <option value="1">Telugu</option>
+                <option value="2">Hindi</option>
+            </select>
+        </div>
+        <h1 style="text-align: center;"><span class="eng">Voting</span><span class="tel">ఓటింగ్</span><span class="hin">मतदान</span></h1>
+        <h2 align="center" id="result"><span class="eng">The winner is </span><span class="tel">విజేత </span><span class="hin">विजेता हैं</span><span id="winner" style="color: green;"></span></h2>
         <div id="main">
-        <h3><center>Instructions</center>
+        <h3><center><span class="eng">Instructions</span><span class="tel">సూచనలు</span><span class="hin">अनुदेश</span></center>
             <ul>
-                <li>Please review the details below for each individual before voting</li>
-                <li>You can vote for only one individual, so please vote carefully</li>
-                <li>Please click the 'submit' button once after voting. If you want to clear your selections, please click on 'reset' button.</li>
+                <li>
+                    <span class="eng">Please review the details below for each individual before voting</span>
+                    <span class="tel">దయచేసి ఓటు వేసే ముందు ప్రతి వ్యక్తి కోసం ఈ క్రింది వివరాలను సమీక్షించండి</span>
+                    <span class="hin">कृपया मतदान से पहले प्रत्येक व्यक्ति के लिए नीचे दिए गए विवरणों की समीक्षा करें</span>
+                </li>
+                <li>
+                    <span class="eng">You can vote for only one individual, so please vote carefully</span>
+                    <span class="tel">మీరు ఒకే వ్యక్తికి మాత్రమే ఓటు వేయవచ్చు, కాబట్టి దయచేసి జాగ్రత్తగా ఓటు వేయండి</span>
+                    <span class="hin">आप केवल एक व्यक्ति के लिए वोट कर सकते हैं, इसलिए कृपया ध्यान से वोट करें</span>
+                </li>
+                <li><span class="eng">Please click the 'submit' button once after voting. If you want to clear your selections, please click on 'reset' button.</span>
+                    <span class="tel">దయచేసి ఓటు వేసిన తర్వాత 'సమర్పించు' బటన్‌ను క్లిక్ చేయండి. మీరు మీ ఎంపికలను క్లియర్ చేయాలనుకుంటే, దయచేసి 'రీసెట్' బటన్ పై క్లిక్ చేయండి.</span>
+                    <span class="hin">कृपया मतदान के बाद एक बार 'सबमिट' बटन पर क्लिक करें। यदि आप अपने चयन को खाली करना चाहते हैं, तो कृपया 'रीसेट' बटन पर क्लिक करें।</span>
+                </li>
             </ul>
         </h3>
-        <table border="2" align="center" width=80% style="border-collapse: collapse;">
-            <th width=70%>Details</th>
-            <th width=15%>Name</th>
-            <th width=15%>Vote</th>
+        <table border="2" align="center" width=80% style="border-collapse: collapse;" id="votetable">
+            <th width=70%><span class="eng">Details</span><span class="tel">వివరాలు</span><span class="hin">विवरण</span></th>
+            <th width=15%><span class="eng">Name</span><span class="tel">పేరు</span><span class="hin">नाम</span></th>
+            <th width=15%><span class="eng">Vote</span><span class="tel">ఓటు</span><span class="hin">वोट</span></th>
             <tr>
-                <td>Boianapalli Vinod Kumar was born on 22 July 1959. He is an Indian politician, advocate and Member of Parliament. He represents the Karimnagar constituency of Telangana State and previously represented Hanamkonda in the 14th Lok Sabha from 2004 to 2009). He is one of the founding members of the Telangana Rashtra Samithi (TRS) party and is presently a politburo member and the party's deputy Floor Leader in the Lok Sabha</td>
-                <td><img src="leaders/vinodkumar.jpg" /><br/><span class="name"><b>Vinod Kumar Boinapally</b></span><br/><span>TRS</span></td>
-                <td><input type="checkbox" class="check" id="a1"></td>
+                <td>
+                    <span class="eng">Boianapalli Vinod Kumar was born on 22 July 1959. He is an Indian politician, advocate and Member of Parliament. He represents the Karimnagar constituency of Telangana State and previously represented Hanamkonda in the 14th Lok Sabha from 2004 to 2009). He is one of the founding members of the Telangana Rashtra Samithi (TRS) party and is presently a politburo member and the party's deputy Floor Leader in the Lok Sabha.</span>
+                    <span class="tel">బోయానపల్లి వినోద్ కుమార్ 22 జూలై 1959 న జన్మించారు. అతను భారతీయ రాజకీయ నాయకుడు, న్యాయవాది మరియు పార్లమెంటు సభ్యుడు. అతను తెలంగాణ రాష్ట్రంలోని కరీంనగర్ నియోజకవర్గానికి ప్రాతినిధ్యం వహిస్తాడు మరియు గతంలో 2004 నుండి 2009 వరకు 14 వ లోక్సభలో హనంకొండకు ప్రాతినిధ్యం వహించాడు). అతను తెలంగాణ రాష్ట్ర సమితి (టిఆర్ఎస్) పార్టీ వ్యవస్థాపక సభ్యులలో ఒకడు మరియు ప్రస్తుతం పొలిట్‌బ్యూరో సభ్యుడు మరియు లోక్‌సభలో పార్టీ డిప్యూటీ ఫ్లోర్ లీడర్.</span>
+                    <span class="hin">बोयानपल्ली विनोद कुमार का जन्म 22 जुलाई 1959 को हुआ था। वह एक भारतीय राजनीतिज्ञ, वकील और संसद सदस्य हैं। वह तेलंगाना राज्य के करीमनगर निर्वाचन क्षेत्र का प्रतिनिधित्व करते हैं और पहले 2004 से 2009 तक 14 वीं लोकसभा में हनमकोंडा का प्रतिनिधित्व करते थे)। वह तेलंगाना राष्ट्र समिति (TRS) पार्टी के संस्थापक सदस्यों में से एक हैं और वर्तमान में एक पोलित ब्यूरो सदस्य और लोकसभा में पार्टी के डिप्टी फ़्लोर लीडर हैं।</span>
+                </td>
+                <td>
+                    <img src="leaders/vinodkumar.jpg" /><br/>
+                    <span class="eng">
+                        <span class="name"><b>Vinod Kumar Boinapally</b></span><br/>
+                        <span>TRS</span>
+                    </span>
+                    <span class="tel">
+                        <span class="name"><b>వినోద్ కుమార్ బోయిన్‌పల్లి</b></span><br/>
+                        <span>టిఆర్ఎస్</span>
+                    </span>
+                    <span class="hin">
+                        <span class="name"><b>विनोद कुमार बोइनपल्ली</b></span><br/>
+                        <span>टीआरएस</span>
+                    </span>
+                </td>
+                <td>
+                    <input type="checkbox" class="check" name="vote" value="1" id="a1">
+                </td>
             </tr>
             <tr>
-                <td>Nara Lokesh is the son of former Chief Minister of Andhra Pradesh Chandrababu Naidu. He forayed into politics as a campaign Manager in 2009 and climbed up the ranks of induction as MLC and Cabinet minister for IT, Panchayati Raj and Rural Development. Lokesh graduated with an MBA from Stanford University Graduate School of Business and Bachelor of Science with specialization in Management Information Systems from Carnegie Mellon University.</td>
-                <td><img src="leaders/lokesh.jpg" /><br/><span class="name"><b>Nara Lokesh</b></span><br/><span>TDP</span></td>
-                <td><input type="checkbox" class="check" id="a2"></td>
+                <td>
+                    <span class="eng">Nara Lokesh is the son of former Chief Minister of Andhra Pradesh Chandrababu Naidu. He forayed into politics as a campaign Manager in 2009 and climbed up the ranks of induction as MLC and Cabinet minister for IT, Panchayati Raj and Rural Development. Lokesh graduated with an MBA from Stanford University Graduate School of Business and Bachelor of Science with specialization in Management Information Systems from Carnegie Mellon University.</span>
+                    <span class="tel">నారా లోకేష్ ఆంధ్రప్రదేశ్ మాజీ ముఖ్యమంత్రి చంద్రబాబు నాయుడు కుమారుడు. అతను 2009 లో ప్రచార నిర్వాహకుడిగా రాజకీయాల్లోకి ప్రవేశించాడు మరియు ఎమ్మెల్సీ మరియు ఐటి, పంచాయతీ రాజ్ మరియు గ్రామీణాభివృద్ధికి క్యాబినెట్ మంత్రిగా ప్రవేశించాడు. లోకేష్ కార్నెగీ మెల్లన్ విశ్వవిద్యాలయం నుండి మేనేజ్మెంట్ ఇన్ఫర్మేషన్ సిస్టమ్స్లో స్పెషలైజేషన్తో స్టాన్ఫోర్డ్ యూనివర్శిటీ గ్రాడ్యుయేట్ స్కూల్ ఆఫ్ బిజినెస్ మరియు బ్యాచిలర్ ఆఫ్ సైన్స్ నుండి MBA పట్టభద్రుడయ్యాడు.</span>
+                    <span class="hin">नारा लोकेश आंध्र प्रदेश के पूर्व मुख्यमंत्री चंद्रबाबू नायडू के बेटे हैं। उन्होंने 2009 में एक अभियान प्रबंधक के रूप में राजनीति में कदम रखा और आईटी, पंचायती राज और ग्रामीण विकास मंत्री के रूप में एमएलसी और कैबिनेट मंत्री के रूप में शामिल हुए। लोकेश ने स्टैनफोर्ड यूनिवर्सिटी ग्रेजुएट स्कूल ऑफ बिजनेस से एमबीए और कार्नेगी मेलन विश्वविद्यालय से प्रबंधन सूचना प्रणाली में विशेषज्ञता के साथ विज्ञान स्नातक की उपाधि प्राप्त की।</span>
+                </td>
+                <td>
+                    <img src="leaders/lokesh.jpg" /><br/>
+                    <span class="eng">
+                        <span class="name"><b>Nara Lokesh</b></span><br/>
+                        <span>TDP</span>
+                    </span>
+                    <span class="tel">
+                        <span class="name"><b>నారా లోకేష్</b></span><br/>
+                        <span>టీడీపీ</span>
+                    </span>
+                    <span class="hin">
+                        <span class="name"><b>नारा लोकेश</b></span><br/>
+                        <span>टीडीपी</span>
+                    </span>
+                </td>
+                <td>
+                    <input type="checkbox" class="check" name="vote" value="2" id="a2">
+                </td>
             </tr>
             <tr>
-                <td>Kishan Reddy is a name not only heard in Indian political sphere but also resonates in international level as an active fighter against cross-border terrorism and as a child-friendly legislator. Born in remote village Thimmapur in Andhra Pradesh, He rose to the rank of national leader. At the age 11, He was elected as the president of his upper primary school. In his college days, He took the initiative to organize awareness programs that highlighted government apathy towards tackling terrorism and Conducted movements to highlight issues of the Blind and Physically challenged and advocated equal opportunities.</td>
-                <td><img src="leaders/kishan.jpg" /><br/><span class="name"><b>Gangapuram Kishan Reddy</b></span><br/><span>BJP</span></td>
-                <td><input type="checkbox" class="check" id="a3"></td>
+                <td>
+                    <span class="eng">Kishan Reddy is a name not only heard in Indian political sphere but also resonates in international level as an active fighter against cross-border terrorism and as a child-friendly legislator. Born in remote village Thimmapur in Andhra Pradesh, He rose to the rank of national leader. At the age 11, He was elected as the president of his upper primary school. In his college days, He took the initiative to organize awareness programs that highlighted government apathy towards tackling terrorism and Conducted movements to highlight issues of the Blind and Physically challenged and advocated equal opportunities.</span>
+                    <span class="tel">కిషన్ రెడ్డి అనేది భారత రాజకీయ రంగంలో వినిపించడమే కాదు, అంతర్జాతీయ స్థాయిలో సరిహద్దు ఉగ్రవాదానికి వ్యతిరేకంగా చురుకైన పోరాట యోధుడిగా మరియు పిల్లల స్నేహపూర్వక శాసనసభ్యుడిగా ప్రతిధ్వనిస్తుంది. ఆంధ్రప్రదేశ్‌లోని తిమ్మపూర్ అనే మారుమూల గ్రామంలో జన్మించిన ఆయన జాతీయ నాయకుడిగా ఎదిగారు. 11 సంవత్సరాల వయస్సులో, అతను తన ఉన్నత పాఠశాల పాఠశాల అధ్యక్షుడిగా ఎన్నికయ్యాడు. తన కళాశాల రోజుల్లో, ఉగ్రవాదాన్ని ఎదుర్కోవటానికి ప్రభుత్వ ఉదాసీనతను ఎత్తిచూపే అవగాహన కార్యక్రమాలను నిర్వహించడానికి ఆయన చొరవ తీసుకున్నారు మరియు అంధుల సమస్యలను ఎత్తిచూపడానికి ఉద్యమాలను నిర్వహించారు మరియు శారీరకంగా సవాలు మరియు సమాన అవకాశాలను సూచించారు.</span>
+                    <span class="hin">किशन रेड्डी एक ऐसा नाम है जो न केवल भारतीय राजनीतिक क्षेत्र में सुना जाता है, बल्कि अंतरराष्ट्रीय स्तर पर सीमा पार आतंकवाद के खिलाफ एक सक्रिय सेनानी के रूप में और एक बाल-सुलभ विधायक के रूप में भी गूंजता है। आंध्र प्रदेश के सुदूर गाँव थिमापुर में जन्मे, वह राष्ट्रीय नेता के पद तक पहुंचे। 11 वर्ष की आयु में, उन्हें अपने उच्च प्राथमिक विद्यालय के अध्यक्ष के रूप में चुना गया। अपने कॉलेज के दिनों में, उन्होंने जागरूकता कार्यक्रमों को आयोजित करने के लिए पहल की, जिसमें आतंकवाद से निपटने के लिए सरकार की उदासीनता पर प्रकाश डाला गया और ब्लाइंड के मुद्दों को उजागर करने के लिए आंदोलनों का संचालन किया गया और शारीरिक रूप से विकलांगों और समान अवसरों की वकालत की गई।</span>
+                </td>
+                <td>
+                    <img src="leaders/kishan.jpg" /><br/>
+                    <span class="eng">
+                        <span class="name"><b>Gangapuram Kishan Reddy</b></span><br/>
+                        <span>BJP</span>
+                    </span>
+                    <span class="tel">
+                        <span class="name"><b>గంగాపురం కిషన్ రెడ్డి</b></span><br/>
+                        <span>బిజెపి</span>
+                    </span>
+                    <span class="hin">
+                        <span class="name"><b>गंगापुरम किशन रेड्डी</b></span><br/>
+                        <span>बीजेपी</span>
+                    </span>
+                </td>
+                <td>
+                    <input type="checkbox" class="check" name="vote" value="3" id="a3">
+                </td>
             </tr>
-            <tr><td colspan="3" style="text-align: center;height: 50px;"><button id="submit">Submit</button>&nbsp;&nbsp;<button id="reset">Reset</button></td></tr>
+            <tr>
+                <td class="btm" colspan="3" style="text-align: center;padding-top: 10px;border-bottom: 1px solid white;">
+                    <button id="submitvote"><span class="eng">Submit</span><span class="tel">సమర్పించండి</span><span class="hin">प्रस्तुत</span></button>&nbsp;&nbsp;
+                    <button id="resetvote"><span class="eng">Reset</span><span class="tel">రీసెట్</span><span class="hin">रीसेट</span></button><br/>
+                </td>
+            </tr>
+            <tr>
+                <td class="btm" colspan="3" style="text-align: center;height: 20px;border-top: 1px solid white;">
+                    <span class="errormsg" style="color: red;font-size: 0.8em;"></span>
+                </td>
+            </tr>
         </table>
     </div>
         <br/><br/><br/>
