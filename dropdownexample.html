@@ -1,0 +1,33 @@
+<!DOCtype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="validation.js"></script>
+    <title>Images Drop-down</title>
+    <style>
+        body{font-family: Arial, Helvetica, sans-serif; margin-top: 50px;}
+        #cityimages{text-align: center;}
+    </style>
+</head>
+<body>
+    <div id="cityimages">
+        <label>Please select your city:&nbsp;&nbsp;</label>
+        <select name="city" id="city">
+        </select>
+        <br/><br/>
+    </div>
+    <script>
+        var obj= {
+            src: ["","Cities/Delhi.jpg","Cities/Mumbai.jpg","Cities/Hyderabad.jpg","Cities/Bangalore.jpg","Cities/Chennai.jpg","Cities/Agra.jpg","Cities/Kolkata.jpg","Cities/Trivandrum.png",""],
+            names: ["Please select","Delhi","Mumbai","Hyderabad","Bangalore","Chennai","Agra","Kolkata","Trivandrum","Display all Cities"]
+        }
+        //$("#city").append("<option>"+obj.names[0]+"</option>");
+        for(var i=0;i<=9;i++)
+        {
+            $("#city").append("<option value='"+i+"'><img src='"+obj.src[i]+"' />&nbsp;"+obj.names[i]+"</option>");
+        }
+    </script>
+</body>
+</html>

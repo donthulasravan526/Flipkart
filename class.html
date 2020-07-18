@@ -1,0 +1,144 @@
+<html>
+    <head>
+ 
+ 
+    </head>
+     <body>
+ 
+        <form>
+            Username:<input id="username" type="text"> <br><br>
+            Comment:  <textarea id="comment"></textarea> <br><br>
+            <button id="addButton" onclick="addComment()">Add Comment</button>
+            <button id="saveButton">Save</button>
+ 
+        </form>
+ 
+        <br>
+         <hr>
+         <br>
+         <ul id="comments" style="list-style-type: none">
+ 
+         </ul>
+ 
+        <script>
+          
+            var commentsArray=[];
+               document.getElementById('saveButton').hidden=true;
+            if(localStorage.getItem('comments') == null){
+                localStorage.setItem('comments',JSON.stringify(commentsArray));
+            }
+            showComments();
+              function addComment(){
+                event.preventDefault();
+              var usernameValue= document.getElementById("username").value;
+              var commentValue= document.getElementById("comment").value;
+ 
+                   var usercomment={
+                     "commentId":generateCommentId(),
+                       "username":usernameValue,
+                        "comment":commentValue,
+                        "timestamp":getDateAndTime()
+                   }
+ 
+ 
+                   var comments=JSON.parse(localStorage.getItem('comments'));
+                    
+                     comments.push(usercomment);
+ 
+                     console.log(comments);
+ 
+                     localStorage.setItem('comments',JSON.stringify(comments));
+ 
+                     emptyFields();
+                     emptyList();
+                     showComments();
+ 
+              }
+ 
+              function emptyFields(){
+                document.getElementById("username").value="";
+                document.getElementById("comment").value="";
+              }
+ 
+              function emptyList(){
+                document.getElementById('comments').innerHTML="";
+              }
+              function showComments(){
+ 
+                var allComments=JSON.parse(localStorage.getItem('comments'));
+ 
+                console.log(allComments);
+ 
+                var commentsList=document.getElementById('comments');
+ 
+                for(var i=0; i<allComments.length;i++){
+ 
+                   commentsList.innerHTML=commentsList.innerHTML+"<li>"+"<i>"+allComments[i].username+ "</i>" + ":"+ "&nbsp;&nbsp;" +allComments[i].comment+"&nbsp;&nbsp;&nbsp;&nbsp;"+ allComments[i].timestamp +"<button onclick=deleteComment("+allComments[i].commentId +")>Delete</button>"+ "&nbsp;&nbsp;&nbsp"+"<button onclick=editComment("+allComments[i].commentId +")>Edit</button>"+"</li>" + "<br>";
+                }
+               
+ 
+              }
+ 
+              function deleteComment(commentId){
+                  event.preventDefault();
+ 
+                  var allComments=JSON.parse(localStorage.getItem('comments'));
+ 
+                    for(var i=0;i<allComments.length;i++){
+ 
+                           if(commentId === allComments[i].commentId){
+                                      allComments.splice(i,1);
+                           }
+ 
+                    }
+                    localStorage.setItem('comments',JSON.stringify(allComments));
+                    emptyList();
+                    showComments();
+                  
+              }
+ 
+              function editComment(commentId){
+                  
+                var allComments=JSON.parse(localStorage.getItem('comments'));
+ 
+                        for(var i=0;i<allComments.length;i++){
+ 
+                              if(commentId === allComments[i].commentId){
+                                    document.getElementById('username').value=allComments[i].username; 
+                                    document.getElementById('username').disabled=true;
+                                    document.getElementById('addButton').hidden=true;
+                                    document.getElementById('saveButton').hidden=false;
+                                    document.getElementById('comment').value=allComments[i].comment;
+                              }
+}
+              }
+ 
+              function generateCommentId(){
+ 
+                     if(localStorage.getItem('currentCommentId') == null){
+                    localStorage.setItem('currentCommentId',0);
+                     }
+                   var currentCommentId=parseInt(localStorage.getItem('currentCommentId'));
+                    currentCommentId++;
+                    localStorage.setItem('currentCommentId',currentCommentId);
+                    
+                    return currentCommentId;
+ 
+              }
+ 
+              function getDateAndTime(){
+ 
+                  var date=new Date();
+                    var dmy=date.getDate() + "/" + (date.getMonth()+1) + "/"+ date.getFullYear();
+                    var time= date.getHours()+ ":"+ date.getMinutes();
+ 
+                    return "&nbsp&nbsp&nbsp" +time + "&nbsp&nbsp&nbsp" +dmy + "&nbsp&nbsp&nbsp";
+ 
+ 
+ 
+              }
+        
+        </script>
+ 
+     </body>
+</html>

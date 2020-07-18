@@ -77,7 +77,7 @@ $(function(){
     $('#dropdown_table td').click(function(){
         $(this).find('input').prop('checked', true);
     });
-    $("#city").find('option[value="0"]').attr("disabled", "disabled");
+    $("#city").find('option[value="0"]').attr("disabled", "disabled").css("cursor","none");
     $("#submitcity").click(function (e) { 
         e.preventDefault();
         var selvalue = $('#city option:selected').val();
@@ -99,9 +99,13 @@ $(function(){
             var scity;
             if(selvalue<9){scity=sellabel;}
             else{scity=radiolabel;}
-            $("#cityimages,#citynames,#next").css('display','none');
-            $("#success").css('display','block').find('span').html("Thank you! You have selected <font color='green'>"+scity+"</font> and it is submitted successfully.");
-            e.preventDefault();
+            //$("#cityimages,#citynames,#next").css('display','none');
+            window.location.href = "success.html";         
+            localStorage.setItem('answer',''+scity+'');
+            var localValue=localStorage.getItem('answer');
+            //$("#success").find('span').html("Thank you! You have selected <font color='green'>"+localValue+"</font> and it is submitted successfully.");
+            //$("#success").css('display','block').find('span').html("Thank you! You have selected <font color='green'>"+scity+"</font> and it is submitted successfully.");
+            //e.preventDefault();
         }
         
     });
@@ -111,5 +115,6 @@ $(function(){
         $('#city option[value=0]').prop('selected', true);
         $("#citynames").css('display','none').find('input').prop('checked', false);
     });
-
+    var localValue=localStorage.getItem('answer');
+    $("#success").find('span').html("Thank you! You have selected <font color='green'>"+localValue+"</font> and it is submitted successfully.");
 });

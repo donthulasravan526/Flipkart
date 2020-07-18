@@ -1,28 +1,16 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Success</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script type="text/javascript" src="validation.js"></script>
-        <script type="text/javascript">
-        //for previous arrow of browser disable
-            $(document).ready(function() {
-                window.history.pushState(null, "", window.location.href);        
-                window.onpopstate = function() {
-                    window.history.pushState(null, "", window.location.href);
-                };
-            });
-          </script>
-    </head>
-    <body>
-       <h1>The Winner is <span id="winner" style="color: green;"></span></h1>
-    </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="validation.js"></script>
+    <title>Success</title>
+    <style>
+        body{font-family: Arial, Helvetica, sans-serif;}
+    </style>
+</head>
+<body>
+    <div id="success" style="text-align: center;"><span style="color:black;font-size: 2em;"></span></div>
+</body>
 </html>

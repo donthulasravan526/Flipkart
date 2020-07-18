@@ -1,0 +1,208 @@
+<!DOCtype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="validation.js"></script>
+    <title>Images Drop-down</title>
+    <style>
+        body{font-family: Arial, Helvetica, sans-serif; margin-top: 50px;}
+        #cityimages{text-align: center;}
+        td{padding: 10px;font-size: 0.9em;}
+        .pointer{cursor: pointer;}
+        #success, #citynames{display: none;}.block{display: block;}
+        .border{border: 1px solid red;}
+    </style>
+</head>
+<body>
+    </div>
+    <!--<div id="success" style="text-align: center;"><span style="color:black;font-size: 2em;"></span></div>-->
+    <div id="cityimages">
+        <label>Please select your city:&nbsp;&nbsp;</label>
+        <select name="city" id="city">
+            <!--<option value="0" style="cursor:none;">Please select</option>
+            <option value="1" data-img="Cities/Delhi.jpg">Delhi</option>
+            <option value="2">Mumbai</option>
+            <option value="3">Hyderabad</option>
+            <option value="4">Bangalore</option>
+            <option value="5">Chennai</option>
+            <option value="6">Agra</option>
+            <option value="7">Kolkata</option>
+            <option value="8">Trivandrum</option>
+            <option value="9">Display all Cities</option>-->
+        </select>
+        <br/><br/>
+    </div>
+    <script>
+        var obj= {
+            src: ["","Cities/Delhi.jpg","Cities/Mumbai.jpg","Cities/Hyderabad.jpg","Cities/Bangalore.jpg","Cities/Chennai.jpg","Cities/Agra.jpg","Cities/Kolkata.jpg","Cities/Trivandrum.png",""],
+            names: ["Please select","Delhi","Mumbai","Hyderabad","Bangalore","Chennai","Agra","Kolkata","Trivandrum","Display all Cities"]
+        }
+        //$("#city").append("<option>"+obj.names[0]+"</option>");
+        for(var i=0;i<=9;i++)
+        {
+            $("#city").append("<option value='"+i+"'><img src='"+obj.src[i]+"' />&nbsp;"+obj.names[i]+"</option>");
+        }
+    </script>
+    <div id="citynames">
+        <table align="center" id="dropdown_table">
+            <tr>
+                <td><input type="radio" name='cityradio' value='1'>&nbsp;<label>Agra,Uttar Pradesh</label></td>
+                <td><input type="radio" name='cityradio' value='2'>&nbsp;<label>Ahmedabad ,Gujarat</label></td>
+                <td><input type="radio" name='cityradio' value='3'>&nbsp;<label>Ajmer,Rajasthan</label></td>
+                <td><input type="radio" name='cityradio' value='4'>&nbsp;<label>Aligarh,Uttar Pradesh</label></td>
+            </tr>
+            <tr>
+                <td><input type="radio" name='cityradio' value='5'>&nbsp;<label>Allahabad,Uttar Pradesh</label></td>
+                <td><input type="radio" name='cityradio' value='6'>&nbsp;<label>Ambattur,Tamil Nadu</label></td>
+                <td><input type="radio" name='cityradio' value='7'>&nbsp;<label>Amravati,Maharashtra</label></td>
+                <td><input type="radio" name='cityradio' value='8'>&nbsp;<label>Amritsar,Punjab</label></td>
+            </tr>
+            <tr>
+                <td><input type="radio" name='cityradio' value='9'>&nbsp;<label>Asansol,West Bengal</label></td>
+                <td><input type="radio" name='cityradio' value='10'>&nbsp;<label>Aurangabad,Maharashtra</label></td>
+                <td><input type="radio" name='cityradio' value='11'>&nbsp;<label>Bangalore ,Karnataka</label></td>
+                <td><input type="radio" name='cityradio' value='12'>&nbsp;<label>Bareilly,Uttar Pradesh</label></td>
+            </tr>
+            <tr>
+                <td><input type="radio" name='cityradio' value='13'>&nbsp;<label>Belgaum,Karnataka</label></td>
+                <td><input type="radio" name='cityradio' value='14'>&nbsp;<label>Bhavnagar,Gujarat</label></td>
+                <td><input type="radio" name='cityradio' value='15'>&nbsp;<label>Bhilai Nagar,Chhattisgarh</label></td>
+                <td><input type="radio" name='cityradio' value='16'>&nbsp;<label>Bhiwandi,Maharashtra</label></td>
+            </tr>
+            <tr>
+                <td><input type="radio" name='cityradio' value='17'>&nbsp;<label>Bhopal,Madhya Pradesh</label></td>
+                <td><input type="radio" name='cityradio' value='18'>&nbsp;<label>Bhubaneswar,Orissa</label></td>
+                <td><input type="radio" name='cityradio' value='19'>&nbsp;<label>Bikaner,Rajasthan</label></td>
+                <td><input type="radio" name='cityradio' value='20'>&nbsp;<label>Chandigarh,Punjab</label></td>
+            </tr>
+            <tr>
+                <td><input type="radio" name='cityradio' value='21'>&nbsp;<label>Chennai ,Tamil Nadu</label></td>
+                <td><input type="radio" name='cityradio' value='22'>&nbsp;<label>Coimbatore,Tamil Nadu</label></td>
+                <td><input type="radio" name='cityradio' value='23'>&nbsp;<label>Cuttack,Orissa</label></td>
+                <td><input type="radio" name='cityradio' value='24'>&nbsp;<label>Dehradun,Uttarakhand</label></td>
+            </tr>
+            <tr>
+                <td><input type="radio" name='cityradio' value='25'>&nbsp;<label>Delhi ,Delhi</label></td>
+                <td><input type="radio" name='cityradio' value='26'>&nbsp;<label>Dhanbad,Jharkhand</label></td>
+                <td><input type="radio" name='cityradio' value='27'>&nbsp;<label>Durgapur,West Bengal</label></td>
+                <td><input type="radio" name='cityradio' value='28'>&nbsp;<label>Faridabad,Haryana</label></td>
+            </tr>
+            <tr>
+                <td><input type="radio" name='cityradio' value='29'>&nbsp;<label>Firozabad,Uttar Pradesh</label></td>
+                <td><input type="radio" name='cityradio' value='30'>&nbsp;<label>Gaya,Bihar</label></td>
+                <td><input type="radio" name='cityradio' value='31'>&nbsp;<label>Ghaziabad,Uttar Pradesh</label></td>
+                <td><input type="radio" name='cityradio' value='32'>&nbsp;<label>Gorakhpur,Uttar Pradesh</label></td>
+            </tr>
+            <tr>
+                <td><input type="radio" name='cityradio' value='33'>&nbsp;<label>Gulbarga,Karnataka</label></td>
+                <td><input type="radio" name='cityradio' value='34'>&nbsp;<label>Guntur,Seemandhra</label></td>
+                <td><input type="radio" name='cityradio' value='35'>&nbsp;<label>Gurgaon,Haryana</label></td>
+                <td><input type="radio" name='cityradio' value='36'>&nbsp;<label>Guwahati,Assam</label></td>
+            </tr>
+            <tr>
+                <td><input type="radio" name='cityradio' value='37'>&nbsp;<label>Gwalior,Madhya Pradesh</label></td>
+                <td><input type="radio" name='cityradio' value='38'>&nbsp;<label>Haora,West Bengal</label></td>
+                <td><input type="radio" name='cityradio' value='39'>&nbsp;<label>Hubli and Dharwad,Karnataka</label></td>
+                <td><input type="radio" name='cityradio' value='40'>&nbsp;<label>Hyderabad ,Telangana</label></td>
+            </tr>
+            <tr>
+                <td><input type="radio" name='cityradio' value='41'>&nbsp;<label>Indore,Madhya Pradesh</label></td>
+                <td><input type="radio" name='cityradio' value='42'>&nbsp;<label>Jabalpur,Maharashtra</label></td>
+                <td><input type="radio" name='cityradio' value='43'>&nbsp;<label>Jaipur,Rajasthan</label></td>
+                <td><input type="radio" name='cityradio' value='44'>&nbsp;<label>Jalandhar,Punjab</label></td>
+            </tr>
+            <tr>
+                <td><input type="radio" name='cityradio' value='45'>&nbsp;<label>Jalgaon,Maharashtra</label></td>
+                <td><input type="radio" name='cityradio' value='46'>&nbsp;<label>Jammu,Jammu & Kashmir</label></td>
+                <td><input type="radio" name='cityradio' value='47'>&nbsp;<label>Jamnagar,Gujarat</label></td>
+                <td><input type="radio" name='cityradio' value='48'>&nbsp;<label>Jamshedpur,Jharkhand</label></td>
+            </tr>
+            <tr>
+                <td><input type="radio" name='cityradio' value='49'>&nbsp;<label>Jhansi,Uttar Pradesh</label></td>
+                <td><input type="radio" name='cityradio' value='50'>&nbsp;<label>Jodhpur,Rajasthan</label></td>
+                <td><input type="radio" name='cityradio' value='51'>&nbsp;<label>Kalyan & Dombivali,Maharashtra</label></td>
+                <td><input type="radio" name='cityradio' value='52'>&nbsp;<label>Kanpur,Uttar Pradesh</label></td>
+            </tr>
+            <tr>
+                <td><input type="radio" name='cityradio' value='53'>&nbsp;<label>Kochi,Kerala</label></td>
+                <td><input type="radio" name='cityradio' value='54'>&nbsp;<label>Kolapur,Maharashtra</label></td>
+                <td><input type="radio" name='cityradio' value='55'>&nbsp;<label>Kolkata ,West Bengal</label></td>
+                <td><input type="radio" name='cityradio' value='56'>&nbsp;<label>Kota,Rajasthan</label></td>
+            </tr>
+            <tr>
+                <td><input type="radio" name='cityradio' value='57'>&nbsp;<label>Loni,Uttar Pradesh</label></td>
+                <td><input type="radio" name='cityradio' value='58'>&nbsp;<label>Lucknow,Uttar Pradesh</label></td>
+                <td><input type="radio" name='cityradio' value='59'>&nbsp;<label>Ludhiana,Punjab</label></td>
+                <td><input type="radio" name='cityradio' value='60'>&nbsp;<label>Madurai,Tamil Nadu</label></td>
+            </tr>
+            <tr>
+                <td><input type="radio" name='cityradio' value='61'>&nbsp;<label>Maheshtala,West Bengal</label></td>
+                <td><input type="radio" name='cityradio' value='62'>&nbsp;<label>Malegoan,Maharashtra</label></td>
+                <td><input type="radio" name='cityradio' value='63'>&nbsp;<label>Mangalore,Karnataka</label></td>
+                <td><input type="radio" name='cityradio' value='64'>&nbsp;<label>Meerut,Uttar Pradesh</label></td>
+            </tr>
+            <tr>
+                <td><input type="radio" name='cityradio' value='65'>&nbsp;<label>Mira and Bhayander,Maharashtra</label></td>
+                <td><input type="radio" name='cityradio' value='66'>&nbsp;<label>Moradabad,Uttar Pradesh</label></td>
+                <td><input type="radio" name='cityradio' value='67'>&nbsp;<label>Mumbai ,Maharashtra</label></td>
+                <td><input type="radio" name='cityradio' value='68'>&nbsp;<label>Mysore,Karnataka</label></td>
+            </tr>
+            <tr>
+                <td><input type="radio" name='cityradio' value='69'>&nbsp;<label>Nagpur,Maharashtra</label></td>
+                <td><input type="radio" name='cityradio' value='70'>&nbsp;<label>Nanded Waghala,Maharashtra</label></td>
+                <td><input type="radio" name='cityradio' value='71'>&nbsp;<label>Nashik,Maharashtra</label></td>
+                <td><input type="radio" name='cityradio' value='72'>&nbsp;<label>Navi Mumbai,Maharashtra</label></td>
+            </tr>
+            <tr>
+                <td><input type="radio" name='cityradio' value='73'>&nbsp;<label>Nellore,Seemandhra</label></td>
+                <td><input type="radio" name='cityradio' value='74'>&nbsp;<label>Noida,Uttar Pradesh</label></td>
+                <td><input type="radio" name='cityradio' value='75'>&nbsp;<label>Patna,Bihar</label></td>
+                <td><input type="radio" name='cityradio' value='76'>&nbsp;<label>Pimpri & Chinchwad,Maharashtra</label></td>
+            </tr>
+            <tr>
+                <td><input type="radio" name='cityradio' value='77'>&nbsp;<label>Pune,Maharashtra</label></td>
+                <td><input type="radio" name='cityradio' value='78'>&nbsp;<label>Raipur,Chhattisgarh</label></td>
+                <td><input type="radio" name='cityradio' value='79'>&nbsp;<label>Rajkot,Gujarat</label></td>
+                <td><input type="radio" name='cityradio' value='80'>&nbsp;<label>Ranchi,Jharkhand</label></td>
+            </tr>
+            <tr>
+                <td><input type="radio" name='cityradio' value='81'>&nbsp;<label>Saharanpur,Uttar Pradesh</label></td>
+                <td><input type="radio" name='cityradio' value='82'>&nbsp;<label>Salem,Tamil Nadu</label></td>
+                <td><input type="radio" name='cityradio' value='83'>&nbsp;<label>Sangli Miraj Kupwad,Maharashtra</label></td>
+                <td><input type="radio" name='cityradio' value='84'>&nbsp;<label>Siliguri,West Bengal</label></td>
+            </tr>
+            <tr>
+                <td><input type="radio" name='cityradio' value='85'>&nbsp;<label>Solapur,Maharashtra</label></td>
+                <td><input type="radio" name='cityradio' value='86'>&nbsp;<label>Srinagar,Jammu & Kashmir</label></td>
+                <td><input type="radio" name='cityradio' value='87'>&nbsp;<label>Surat,Gujarat</label></td>
+                <td><input type="radio" name='cityradio' value='88'>&nbsp;<label>Thane,Maharashtra</label></td>
+            </tr>
+            <tr>
+                <td><input type="radio" name='cityradio' value='89'>&nbsp;<label>Thiruvananthapuram,Kerala</label></td>
+                <td><input type="radio" name='cityradio' value='90'>&nbsp;<label>Tiruchirappalli,Tamil Nadu</label></td>
+                <td><input type="radio" name='cityradio' value='91'>&nbsp;<label>Tirunelveli,Tamil Nadu</label></td>
+                <td><input type="radio" name='cityradio' value='92'>&nbsp;<label>Udaipur,Rajasthan</label></td>
+            </tr>
+            <tr>
+                <td><input type="radio" name='cityradio' value='93'>&nbsp;<label>Ujjain,Madhya Pradesh</label></td>
+                <td><input type="radio" name='cityradio' value='94'>&nbsp;<label>Ulhasnagar,Maharashtra</label></td>
+                <td><input type="radio" name='cityradio' value='95'>&nbsp;<label>Vadodara,Gujarat</label></td>
+                <td><input type="radio" name='cityradio' value='96'>&nbsp;<label>Varanasi,Uttar Pradesh</label></td>
+            </tr>
+            <tr>
+                <td><input type="radio" name='cityradio' value='97'>&nbsp;<label>Vasai Virar,Maharashtra</label></td>
+                <td><input type="radio" name='cityradio' value='98'>&nbsp;<label>Vijayawada,Seemandhra</label></td>
+                <td><input type="radio" name='cityradio' value='99'>&nbsp;<label>Visakhapatnam,Seemandhra</label></td>
+                <td><input type="radio" name='cityradio' value='100'>&nbsp;<label>Warangal,Telangana</label></td>
+            </tr>       
+        </table>
+    </div>
+    <br/>
+    <div id="next" align="center">
+        <button id="submitcity">Submit</button>&nbsp;
+        <button id="resetcity">Reset</button>
+    </div>
+</body>
+</html>

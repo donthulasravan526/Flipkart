@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        body{font-family: Arial, Helvetica, sans-serifal;}
+        #save{display: none;}
+        #reviews{width: 400px;}
+        #reviews tr td:first-child{width: 50%;word-break: break-word;}
+    </style>
+    <title>ReviewCommenting</title>
+</head>
+<body>
+    <h2 align="center">Review Blog</h2>
+    <form autocomplete="off">
+        <table align="center">
+            <tr><td align="right"><label><b>Username:</b></label></td><td><input type="text" id="user" /> </td></tr>
+            <tr><label><td><b>Your Comment:</b></label></td><td><input type="text" id="cmnt" /></td></tr>
+            <tr><td colspan="2" align="right" style="padding-top: 10px;"><button id="submit">Submit</button><button id="save">Save</button></td></tr>
+        </table>
+    </form>
+    <hr>
+    <table id="reviews">
+
+    </table>
+<script>
+    var commentarray=[];
+    if(localStorage.getItem("comment")==null){localStorage.setItem("comment",JSON.stringify(commentarray));}
+    var get=JSON.parse(localStorage.getItem('comment'));
+    show();
+    var flag=false;
+    $("form").submit(function(e){
+        e.preventDefault();
+        var user=$.trim($("#user").val());var cmnt=$.trim($("#cmnt").val());var date=new Date(); var min=date.getMinutes();
+        if(min<10){ min="0"+min; }
+        var ctime=date.getDay()+"/"+(date.getMonth()+1)+"/"+date.getFullYear()+" "+date.getHours()+":"+min;
+        if(user==""||cmnt=="")
+        {
+            alert("Please enter all fields");
+        }
+        else{
+            store(user,cmnt,ctime);
+            show();
+        }
+        
+    });
+    function store(user,cmnt,ctime){
+        //to store user entered data as a string(array) in local storage
+        if(flag)
+        {
+            for(i=0;i<get.length;i++)
+            {
+                if(get[i].uname==user)
+                {
+                    var userinfo={uname:user,comm:cmnt,time:ctime}
+                    get.splice(i,1,userinfo);
+                    localStorage.setItem('comment',JSON.stringify(get));
+                    flag=false;
+                }
+            }
+        }
+        else
+        {
+            var userinfo={uname:user,comm:cmnt,time:ctime}
+            get.push(userinfo);
+            localStorage.setItem('comment',JSON.stringify(get));
+        }
+    }
+    function show(){
+        //to display user entered data from local storage by retrieving the same as array
+        //console.log('entered');
+        $("#reviews tr").remove();
+        for(i=0;i<get.length;i++)
+        {
+            $("#reviews").append("<tr><td><b>"+get[i].uname+"</b>: "+get[i].comm+"</td><td>"+get[i].time+"</td><td><button onclick='del("+i+")'>Del</button>&nbsp;&nbsp;<button onclick='edit("+i+")'>Edit</button></td></tr>");
+            $("#user,#cmnt").val("");
+            $("#user").prop('disabled', false);
+            $("#submit").css("display","block"); $("#save").css("display","none");
+        }
+    }
+    function del(i){
+        //var id=i.substr(1);
+        get.splice(i,1);
+        localStorage.setItem('comment',JSON.stringify(get));
+        show();
+    }
+    function edit(i){
+        flag=true;
+        var guser=get[i].uname; var gcomm=get[i].comm;
+        $("#user").val(guser).prop('disabled', true);
+        $("#cmnt").val(gcomm);
+        $("#submit").css("display","none"); $("#save").css("display","block");
+        /*get.splice(i,1);
+        localStorage.setItem('comment',JSON.stringify(get));
+        show();*/
+    }
+</script>
+</body>
+</html>

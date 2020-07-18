@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form onsubmit="enter()">
+        Username:<input type="text" id="user" />
+        comment:<input type="text" id="comm" />
+        <button id="submit">Submit</button>
+    </form> 
+    <br/>
+    <br/>
+    <ul id="list" style="list-style-type: none;"></ul>
+    <script>
+        var array=[];
+       if(localStorage.getItem('comments')==null) {localStorage.setItem('comments',JSON.stringify(array));}
+       display();
+        function enter(){
+            event.preventDefault();
+            store();
+            display();
+        }
+        function store(){
+            var username=document.getElementById('user');
+            var comment=document.getElementById('comm');
+            var details={
+                user:username.value,
+                comm:comment.value
+            }
+            var arrconvert=JSON.parse(localStorage.getItem('comments'));
+            arrconvert.push(details);
+            console.log(arrconvert);
+            localStorage.setItem('comments',JSON.stringify(arrconvert));
+            username.value="";
+            comment.value="";
+        }
+        function display(){
+            var array=JSON.parse(localStorage.getItem('comments'));
+            console.log(array.length);
+            var lid=document.getElementById("list");
+            lid.innerHTML="";
+            for(i=0;i<array.length;i++){
+                lid.innerHTML=lid.innerHTML+"<li>"+array[i].user+":"+array[i].comm+"&nbsp;&nbsp;<button>Del</button></li>";
+            }
+        }
+    </script>
+</body>
+</html>
