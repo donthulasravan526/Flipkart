@@ -6,9 +6,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
         body{font-family: Arial, Helvetica, sans-serifal;}
-        #save{display: none;}
-        #reviews{width: 400px;}
-        #reviews tr td:first-child{width: 50%;word-break: break-word;}
+        #save,.emoji,.liked{display: none;}
+        #reviews{width: 500px;}
+        #reviews tr td:first-child{width: 30%;word-break: break-word;}
+        #reviews tr td:nth-child(2){width: 30%;}
+        .emoji{font-size: 12px;cursor: pointer;}
     </style>
     <title>ReviewCommenting</title>
 </head>
@@ -30,31 +32,35 @@
     if(localStorage.getItem("comment")==null){localStorage.setItem("comment",JSON.stringify(commentarray));}
     var get=JSON.parse(localStorage.getItem('comment'));
     show();
-    var flag=false;
+    var flag=false; var unique=0;
     $("form").submit(function(e){
         e.preventDefault();
         var user=$.trim($("#user").val());var cmnt=$.trim($("#cmnt").val());var date=new Date(); var min=date.getMinutes();
         if(min<10){ min="0"+min; }
         var ctime=date.getDay()+"/"+(date.getMonth()+1)+"/"+date.getFullYear()+" "+date.getHours()+":"+min;
+        var likeValue=0;
         if(user==""||cmnt=="")
         {
             alert("Please enter all fields");
         }
         else{
-            store(user,cmnt,ctime);
+            store(user,cmnt,ctime,likeValue);
             show();
         }
         
     });
-    function store(user,cmnt,ctime){
+    function store(user,cmnt,ctime,likeValue){
         //to store user entered data as a string(array) in local storage
         if(flag)
         {
             for(i=0;i<get.length;i++)
             {
-                if(get[i].uname==user)
+                if(get[i].uname==user && i==unique)
                 {
-                    var userinfo={uname:user,comm:cmnt,time:ctime}
+                    if(get[i].like==1){$("#like"+i).hide();$("#liked"+i).show();likeValue=1;}
+                    if(get[i].like==2){$("#like"+i).hide();$("#liked"+i+",#emo1"+i).show();likeValue=2;}
+                    if(get[i].like==3){$("#like"+i).hide();$("#liked"+i+",#emo2"+i).show();likeValue=3;}
+                    var userinfo={uname:user,comm:cmnt,time:ctime,like:likeValue}
                     get.splice(i,1,userinfo);
                     localStorage.setItem('comment',JSON.stringify(get));
                     flag=false;
@@ -63,7 +69,7 @@
         }
         else
         {
-            var userinfo={uname:user,comm:cmnt,time:ctime}
+            var userinfo={uname:user,comm:cmnt,time:ctime,like:likeValue}
             get.push(userinfo);
             localStorage.setItem('comment',JSON.stringify(get));
         }
@@ -74,11 +80,60 @@
         $("#reviews tr").remove();
         for(i=0;i<get.length;i++)
         {
-            $("#reviews").append("<tr><td><b>"+get[i].uname+"</b>: "+get[i].comm+"</td><td>"+get[i].time+"</td><td><button onclick='del("+i+")'>Del</button>&nbsp;&nbsp;<button onclick='edit("+i+")'>Edit</button></td></tr>");
-            $("#user,#cmnt").val("");
-            $("#user").prop('disabled', false);
-            $("#submit").css("display","block"); $("#save").css("display","none");
+            $("#reviews").append("<tr><td><b>"+get[i].uname+"</b>: "+get[i].comm+"</td><td><span onmouseover='mouseover("+i+")' onmouseout='mouseout("+i+")'><button class='like' id='like"+i+"' onclick='like("+i+")'>Like</button><button class='liked' id='liked"+i+"' onclick='disliked("+i+")'>Liked</button>&nbsp;<span onclick='emo1("+i+") 'id='emo1"+i+"' class='emoji'>&#128512;</span><span onclick='emo2("+i+")' id='emo2"+i+"' class='emoji'>&#128540;</span></span></td><td>"+get[i].time+"</td><td><button onclick='del("+i+")'>Del</button>&nbsp;&nbsp;<button onclick='edit("+i+")'>Edit</button></td></tr>");
+            if(get[i].like==1){$("#like"+i).hide();$("#liked"+i).show();}
+            if(get[i].like==2){$("#like"+i).hide();$("#liked"+i+",#emo1"+i).show();}
+            if(get[i].like==3){$("#like"+i).hide();$("#liked"+i+",#emo2"+i).show();}
         }
+        $("#user,#cmnt").val("");
+        $("#user").prop('disabled', false);
+        $("#submit").css("display","block"); $("#save").css("display","none");
+    }
+    function mouseover(i)
+    {
+        $("#emo1"+i+",#emo2"+i).show();
+    }
+    function mouseout(i)
+    {
+        if(get[i].like==0||get[i].like==1){ $("#emo1"+i+",#emo2"+i).hide();}
+        if(get[i].like==2){$("#emo2"+i).hide();}
+        if(get[i].like==3){$("#emo1"+i).hide();}
+    }
+    function like(i)
+    {
+        $("#like"+i).hide();
+        $("#liked"+i).show();
+        likeValue=1;
+        var userinfo={uname:get[i].uname,comm:get[i].comm,time:get[i].time,like:likeValue}
+        get.splice(i,1,userinfo);
+        localStorage.setItem('comment',JSON.stringify(get));
+    }
+    function disliked(i)
+    {
+        $("#liked"+i).hide();
+        $("#like"+i).show();
+        likeValue=0;
+        var userinfo={uname:get[i].uname,comm:get[i].comm,time:get[i].time,like:likeValue}
+        get.splice(i,1,userinfo);
+        localStorage.setItem('comment',JSON.stringify(get));
+    }
+    function emo1(i)
+    {
+        $("#like"+i+",#emo2"+i).hide();
+        $("#liked"+i+",#emo1"+i).show();
+        likeValue=2;
+        var userinfo={uname:get[i].uname,comm:get[i].comm,time:get[i].time,like:likeValue}
+        get.splice(i,1,userinfo);
+        localStorage.setItem('comment',JSON.stringify(get));
+    }
+    function emo2(i)
+    {
+        $("#like"+i+",#emo1"+i).hide();
+        $("#liked"+i+",#emo2"+i).show();
+        likeValue=3;
+        var userinfo={uname:get[i].uname,comm:get[i].comm,time:get[i].time,like:likeValue}
+        get.splice(i,1,userinfo);
+        localStorage.setItem('comment',JSON.stringify(get));
     }
     function del(i){
         //var id=i.substr(1);
@@ -92,9 +147,7 @@
         $("#user").val(guser).prop('disabled', true);
         $("#cmnt").val(gcomm);
         $("#submit").css("display","none"); $("#save").css("display","block");
-        /*get.splice(i,1);
-        localStorage.setItem('comment',JSON.stringify(get));
-        show();*/
+        unique=i;
     }
 </script>
 </body>
