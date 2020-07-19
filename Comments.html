@@ -89,18 +89,15 @@
         $("#user").prop('disabled', false);
         $("#submit").css("display","block"); $("#save").css("display","none");
     }
-    function mouseover(i)
-    {
+    function mouseover(i){
         $("#emo1"+i+",#emo2"+i).show();
     }
-    function mouseout(i)
-    {
+    function mouseout(i){
         if(get[i].like==0||get[i].like==1){ $("#emo1"+i+",#emo2"+i).hide();}
         if(get[i].like==2){$("#emo2"+i).hide();}
         if(get[i].like==3){$("#emo1"+i).hide();}
     }
-    function like(i)
-    {
+    function like(i){
         $("#like"+i).hide();
         $("#liked"+i).show();
         likeValue=1;
@@ -108,8 +105,7 @@
         get.splice(i,1,userinfo);
         localStorage.setItem('comment',JSON.stringify(get));
     }
-    function disliked(i)
-    {
+    function disliked(i){
         $("#liked"+i).hide();
         $("#like"+i).show();
         likeValue=0;
@@ -117,8 +113,7 @@
         get.splice(i,1,userinfo);
         localStorage.setItem('comment',JSON.stringify(get));
     }
-    function emo1(i)
-    {
+    function emo1(i){
         $("#like"+i+",#emo2"+i).hide();
         $("#liked"+i+",#emo1"+i).show();
         likeValue=2;
@@ -126,8 +121,7 @@
         get.splice(i,1,userinfo);
         localStorage.setItem('comment',JSON.stringify(get));
     }
-    function emo2(i)
-    {
+    function emo2(i){
         $("#like"+i+",#emo1"+i).hide();
         $("#liked"+i+",#emo2"+i).show();
         likeValue=3;
