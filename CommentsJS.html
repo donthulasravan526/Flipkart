@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body{font-family: Arial, Helvetica, sans-serifal;}
+        #save,.emoji,.liked{display: none;}
+        #reviews{width: 500px;}
+        #reviews tr td:first-child{width: 30%;word-break: break-word;}
+        #reviews tr td:nth-child(2){width: 30%;}
+        .emoji{font-size: 12px;cursor: pointer;}
+    </style>
+    <title>ReviewCommenting</title>
+</head>
+<body>
+    <h2 align="center">Comments Blog</h2>
+    <form autocomplete="off" onsubmit="formSubmit()">
+        <table align="center">
+            <tr><td align="right"><label><b>Username:</b></label></td><td><input type="text" id="user" /> </td></tr>
+            <tr><label><td><b>Your Comment:</b></label></td><td><input type="text" id="cmnt" /></td></tr>
+            <tr><td colspan="2" align="right" style="padding-top: 10px;"><button id="submit">Submit</button><button id="save">Save</button></td></tr>
+        </table>
+    </form>
+    <hr>
+    <table id="reviews">
+
+    </table>
+<script>
+    var commentarray=[];
+    if(localStorage.getItem("commentJS")==null){localStorage.setItem("commentJS",JSON.stringify(commentarray));}
+    var get=JSON.parse(localStorage.getItem('commentJS'));
+    var form=document.getElementsByName('form');
+    var userid=document.getElementById('user');
+    var cmntid=document.getElementById('cmnt');
+    var submit=document.getElementById('submit');
+    var save=document.getElementById('save');
+    var reviews=document.getElementById('reviews');
+    show();
+    var flag=false; var unique=0;
+    function formSubmit(){
+        event.preventDefault();
+        var user=document.getElementById('user').value;
+        var cmnt=document.getElementById('cmnt').value; var date=new Date(); var min=date.getMinutes();
+        if(min<10){ min="0"+min; }
+        var ctime=date.getDay()+"/"+(date.getMonth()+1)+"/"+date.getFullYear()+" "+date.getHours()+":"+min;
+        var likeValue=0;
+        if(user==""||cmnt=="")
+        {
+            alert("Please enter all fields");
+        }
+        else{
+            store(user,cmnt,ctime,likeValue);
+            show();
+        }
+        
+    }
+    function store(user,cmnt,ctime,likeValue){
+        //to store user entered data as a string(array) in local storage
+        if(flag)
+        {
+            for(i=0;i<get.length;i++)
+            {
+                if(get[i].uname==user && i==unique)
+                {
+                    if(get[i].like==1){document.getElementById('like'+i).style.display='none';document.getElementById('liked'+i).style.display='inline-block';likeValue=1;}
+                    if(get[i].like==2){document.getElementById('like'+i).style.display='none';document.getElementById('liked'+i).style.display='inline-block';document.getElementById('emo1'+i).style.display='inline-block';likeValue=2;}
+                    if(get[i].like==3){document.getElementById('like'+i).style.display='none';document.getElementById('liked'+i).style.display='inline-block';document.getElementById('emo2'+i).style.display='inline-block';likeValue=3;}
+                    var userinfo={uname:user,comm:cmnt,time:ctime,like:likeValue}
+                    get.splice(i,1,userinfo);
+                    localStorage.setItem('commentJS',JSON.stringify(get));
+                    reviews.deleteRow(i);
+                    flag=false;
+                }
+            }
+        }
+        else
+        {
+            var userinfo={uname:user,comm:cmnt,time:ctime,like:likeValue}
+            get.push(userinfo);
+            localStorage.setItem('commentJS',JSON.stringify(get));
+        }
+    }
+    function show(){
+        reviews.innerHTML="";
+        for(i=0;i<get.length;i++)
+        {
+            reviews.innerHTML=reviews.innerHTML+"<tr><td><b>"+get[i].uname+"</b>: "+get[i].comm+"</td><td><span onmouseover='mouseover("+i+")' onmouseout='mouseout("+i+")'><button class='like' id='like"+i+"' onclick='like("+i+")'>Like</button><button class='liked' id='liked"+i+"' onclick='disliked("+i+")'>Liked</button>&nbsp;<span onclick='emo1("+i+") 'id='emo1"+i+"' class='emoji'>&#128512;</span><span onclick='emo2("+i+")' id='emo2"+i+"' class='emoji'>&#128540;</span></span></td><td>"+get[i].time+"</td><td><button onclick='del("+i+")'>Del</button>&nbsp;&nbsp;<button onclick='edit("+i+")'>Edit</button></td></tr>";
+            if(get[i].like==1){document.getElementById('like'+i).style.display='none';document.getElementById('liked'+i).style.display='inline-block';}
+            if(get[i].like==2){document.getElementById('like'+i).style.display='none';document.getElementById('liked'+i).style.display='inline-block';document.getElementById('emo1'+i).style.display='inline-block';}
+            if(get[i].like==3){document.getElementById('like'+i).style.display='none';document.getElementById('liked'+i).style.display='inline-block';document.getElementById('emo2'+i).style.display='inline-block';}
+        }
+        userid.value="";cmntid.value="";
+        userid.disabled=false;
+        submit.style.display='inline-block';
+        save.style.display='none';
+    }
+    function mouseover(i){
+        document.getElementById('emo1'+i).style.display='inline-block';document.getElementById('emo2'+i).style.display='inline-block';
+    }
+    function mouseout(i){
+        if(get[i].like==0||get[i].like==1){ document.getElementById('emo1'+i).style.display='none';document.getElementById('emo2'+i).style.display='none';}
+        if(get[i].like==2){document.getElementById('emo2'+i).style.display='none';}
+        if(get[i].like==3){document.getElementById('emo1'+i).style.display='none';}
+    }
+    function like(i){
+        console.log(emoji());
+        document.getElementById('like'+i).style.display='none';document.getElementById('liked'+i).style.display='inline-block';
+        likeValue=1;
+        var userinfo={uname:get[i].uname,comm:get[i].comm,time:get[i].time,like:likeValue}
+        get.splice(i,1,userinfo);
+        localStorage.setItem('commentJS',JSON.stringify(get));
+    }
+    function disliked(i){
+        document.getElementById('like'+i).style.display='inline-block';document.getElementById('liked'+i).style.display='none';
+        likeValue=0;
+        var userinfo={uname:get[i].uname,comm:get[i].comm,time:get[i].time,like:likeValue}
+        get.splice(i,1,userinfo);
+        localStorage.setItem('commentJS',JSON.stringify(get));
+    }
+    function emo1(i){
+        
+        document.getElementById('like'+i).style.display='none';document.getElementById('liked'+i).style.display='inline-block';document.getElementById('emo1'+i).style.display='inline-block';document.getElementById('emo2'+i).style.display='none';
+        likeValue=2;
+        var userinfo={uname:get[i].uname,comm:get[i].comm,time:get[i].time,like:likeValue}
+        get.splice(i,1,userinfo);
+        localStorage.setItem('commentJS',JSON.stringify(get));
+    }
+    function emo2(i){
+        
+        document.getElementById('like'+i).style.display='none';document.getElementById('liked'+i).style.display='inline-block';document.getElementById('emo1'+i).style.display='none';document.getElementById('emo2'+i).style.display='inline-block';
+        likeValue=3;
+        var userinfo={uname:get[i].uname,comm:get[i].comm,time:get[i].time,like:likeValue}
+        get.splice(i,1,userinfo);
+        localStorage.setItem('commentJS',JSON.stringify(get));
+    }
+    function del(i){
+        //var id=i.substr(1);
+        get.splice(i,1);
+        localStorage.setItem('commentJS',JSON.stringify(get));
+        show();
+        //reviews.deleteRow(i);
+    }
+    function edit(i){
+        flag=true;
+        var guser=get[i].uname; var gcomm=get[i].comm;
+        userid.value=guser;userid.disabled=true;
+        cmntid.value=gcomm;
+        submit.style.display='none';
+        save.style.display='inline-block';
+        unique=i;
+    }
+</script>
+</body>
+</html>
