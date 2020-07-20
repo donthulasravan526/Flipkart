@@ -32,13 +32,18 @@
     if(localStorage.getItem("comment")==null){localStorage.setItem("comment",JSON.stringify(commentarray));}
     var get=JSON.parse(localStorage.getItem('comment'));
     function set(){localStorage.setItem('comment',JSON.stringify(get));}
+    function userinfo(i){
+        var userinfo={uname:get[i].uname,comm:get[i].comm,time:get[i].time,like:likeValue}
+        get.splice(i,1,userinfo);
+        set();
+    }
     show();
     var flag=false; var unique=0;
     $("form").submit(function(e){
         e.preventDefault();
         var user=$.trim($("#user").val());var cmnt=$.trim($("#cmnt").val());var date=new Date(); var min=date.getMinutes();
         if(min<10){ min="0"+min; }
-        var ctime=date.getDay()+"/"+(date.getMonth()+1)+"/"+date.getFullYear()+" "+date.getHours()+":"+min;
+        var ctime=date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear()+" "+date.getHours()+":"+min;
         var likeValue=0;
         if(user==""||cmnt=="")
         {
@@ -56,12 +61,9 @@
         {
             for(i=0;i<get.length;i++)
             {
-                if(get[i].uname==user && i==unique)
+                if(i==unique)
                 {
-                    if(get[i].like==1){$("#like"+i).hide();$("#liked"+i).show();likeValue=1;}
-                    if(get[i].like==2){$("#like"+i).hide();$("#liked"+i+",#emo1"+i).show();likeValue=2;}
-                    if(get[i].like==3){$("#like"+i).hide();$("#liked"+i+",#emo2"+i).show();likeValue=3;}
-                    var userinfo={uname:user,comm:cmnt,time:ctime,like:likeValue}
+                    var userinfo={uname:user,comm:cmnt,time:ctime,like:get[i].like}
                     get.splice(i,1,userinfo);
                     set();
                     flag=false;
@@ -102,33 +104,25 @@
         $("#like"+i).hide();
         $("#liked"+i).show();
         likeValue=1;
-        var userinfo={uname:get[i].uname,comm:get[i].comm,time:get[i].time,like:likeValue}
-        get.splice(i,1,userinfo);
-        set();
+        userinfo(i);
     }
     function disliked(i){
         $("#liked"+i).hide();
         $("#like"+i).show();
         likeValue=0;
-        var userinfo={uname:get[i].uname,comm:get[i].comm,time:get[i].time,like:likeValue}
-        get.splice(i,1,userinfo);
-        set();
+        userinfo(i);
     }
     function emo1(i){
         $("#like"+i+",#emo2"+i).hide();
         $("#liked"+i+",#emo1"+i).show();
         likeValue=2;
-        var userinfo={uname:get[i].uname,comm:get[i].comm,time:get[i].time,like:likeValue}
-        get.splice(i,1,userinfo);
-        set();
+        userinfo(i);
     }
     function emo2(i){
         $("#like"+i+",#emo1"+i).hide();
         $("#liked"+i+",#emo2"+i).show();
         likeValue=3;
-        var userinfo={uname:get[i].uname,comm:get[i].comm,time:get[i].time,like:likeValue}
-        get.splice(i,1,userinfo);
-        set();
+        userinfo(i);
     }
     function del(i){
         //var id=i.substr(1);

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body{font-family: Arial, Helvetica, sans-serif;}
+        #form{border: 1px solid black;padding-left: 30px;}
+        #table{display: none;}
+        #table tr td{text-align: center;}
+        #table tr td:nth-child(2){color: blue;}
+    </style>
+    <title>Quiz</title>
+</head>
+<body>
+    <form id='form' onsubmit="form()">
+        <center><h2>Simple Quiz</h2></center>
+        <ul style="margin-left: 400px;">
+            <li>Please select one answer for each question</li>
+            <li>After submitting answers you are able to see your result</li>
+        </ul>
+        <p>What is the capital city of Indonesia?</p>
+        <input type="radio" class="fq" name="fq" value="1" /><lable>Kaulalampur</lable><br/>
+        <input type="radio" class="fq" name="fq" value="2" /><lable>Jakarta</lable><br/>
+        <input type="radio" class="fq" name="fq" value="3" /><lable>Pecking/Beijing</lable><br/>
+        <input type="radio" class="fq" name="fq" value="4" /><lable>Tehran</lable>
+        <br/>
+        <br/>
+        <p>How many continents we have?</p>
+        <input type="radio" class="sq" name="sq" value="1" /><lable>4</lable><br/>
+        <input type="radio" class="sq" name="sq" value="2" /><lable>8</lable><br/>
+        <input type="radio" class="sq" name="sq" value="3" /><lable>7</lable><br/>
+        <input type="radio" class="sq" name="sq" value="4" /><lable>9</lable>
+        <br/>
+        <br/>
+        <p>Who is the President of US?</p>
+        <input type="radio" class="tq" name="tq" value="1" /><lable>Narendra Modi</lable><br/>
+        <input type="radio" class="tq" name="tq" value="2" /><lable>Xi Jinping</lable><br/>
+        <input type="radio" class="tq" name="tq" value="3" /><lable>Scott Morrison</lable><br/>
+        <input type="radio" class="tq" name="tq" value="4" /><lable>Donald Trump</lable>
+        <br/>
+        <br/>
+        <p>What is the national animal of China?</p>
+        <input type="radio" class="foq" name="foq" value="1" /><lable>Tiger</lable><br/>
+        <input type="radio" class="foq" name="foq" value="2" /><lable>Giant Panda</lable><br/>
+        <input type="radio" class="foq" name="foq" value="3" /><lable>Deer</lable><br/>
+        <input type="radio" class="foq" name="foq" value="4" /><lable>ElephantWhat</lable>
+        <br/>
+        <br/>
+        <p>How many oceans we have?</p>
+        <input type="radio" class="fiq" name="fiq" value="1" /><lable>6</lable><br/>
+        <input type="radio" class="fiq" name="fiq" value="2" /><lable>3</lable><br/>
+        <input type="radio" class="fiq" name="fiq" value="3" /><lable>8</lable><br/>
+        <input type="radio" class="fiq" name="fiq" value="4" /><lable>7</lable><br/>
+        <br/>
+        <center><button id="Submit">Submit</button></center>
+        <br/> <br/>
+    </form>
+    <div id='table'>
+    <table align="center">
+            <th>Question</th><th>Your Answer</th><th>Correct Answer</th>
+            <tr><td>What is the capital city of Indonesia?</td><td id='fq'></td><td>2</td></tr>
+            <tr><td>How many continents we have?</td><td id='sq'></td><td>3</td></tr>
+            <tr><td>Who is the President of US?</td><td id='tq'></td><td>4</td></tr>
+            <tr><td>What is the national animal of China?</td><td id='foq'></td><td>2</td></tr>
+            <tr><td>How many oceans we have?</td><td id='fiq'></td><td>4</td></tr>
+            <tr><td colspan='3'>Result: <span id='result'></span></td></tr>
+    </table>
+    <center><h2>Thanks for Participating!</h2></center>
+</div>
+    <script>
+        function form(){
+            event.preventDefault();var flag=false;
+            var fq =document.querySelector('input[name="fq"]:checked');
+            var sq = document.querySelector('input[name="sq"]:checked');
+            var tq = document.querySelector('input[name="tq"]:checked');
+            var foq = document.querySelector('input[name="foq"]:checked');
+            var fiq = document.querySelector('input[name="fiq"]:checked');
+            if(fq==null && sq==null && tq==null && foq==null && fiq==null)
+            {
+                flag=true;
+                alert("Please give answers before submitting.");
+            }
+            else if((fq==null || sq==null || tq==null || foq==null || fiq==null) && !flag)
+            {
+                alert("Please give answers for all. You forgot something.")
+            }
+            else
+            {
+                document.getElementById('form').style.display='none';
+                document.getElementById('table').style.display='block';
+                document.getElementById('fq').innerHTML=fq.value;
+                document.getElementById('sq').innerHTML=sq.value;
+                document.getElementById('tq').innerHTML=tq.value;
+                document.getElementById('foq').innerHTML=foq.value;
+                document.getElementById('fiq').innerHTML=fiq.value;
+                if(fq.value==2 && sq.value==3 && tq.value==4 && foq.value==2 && fiq.value==4)
+                {
+                    document.getElementById('result').innerHTML="You Win!";
+                    document.getElementById('result').style.color='green';
+                }
+                else
+                {
+                    document.getElementById('result').innerHTML="You Lose!";
+                    document.getElementById('result').style.color='red';
+                }
+            }
+            
+        }
+    </script>
+</body>
+</html>

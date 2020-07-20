@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body{font-family: Arial, Helvetica, sans-serif;}
+        table, table tr td{border: 1px solid black;text-align: center;border-collapse: collapse;}
+    </style>
+    <title>Result</title>
+</head>
+<body>
+
+    <table align="center">
+            <th>Question</th><th>Your Answer</th><th>Correct Answer</th>
+            <tr><td>What is the capital city of Indonesia?</td><td id='fq'></td><td>2</td></tr>
+            <tr><td>How many continents we have?</td><td id='sq'></td><td>3</td></tr>
+            <tr><td>Who is the President of US?</td><td id='tq'></td><td>4</td></tr>
+            <tr><td>What is the national animal of China?</td><td id='foq'></td><td>2</td></tr>
+            <tr><td>How many oceans we have?</td><td id='fiq'></td><td>4</td></tr>
+            <tr><td colspan='3'>Result: <span id='result'></span></td></tr>
+    </table>
+    <center><h2>Thanks for Participating!</h2>
+            <h4>Want to participate again! Please <a href="quizlocal.html">click here</a>.</h4></center>
+    <script>
+        var get=JSON.parse(localStorage.getItem('quizdata'));
+        document.getElementById('fq').innerHTML=get.first;
+        document.getElementById('sq').innerHTML=get.second;
+        document.getElementById('tq').innerHTML=get.third;
+        document.getElementById('foq').innerHTML=get.fourth;;
+        document.getElementById('fiq').innerHTML=get.fifth;;
+        if(get.first==2&&get.second==3&&get.third==4&&get.fourth==2&&get.fifth==4)
+        {
+            document.getElementById('result').innerHTML="You Win!";
+            document.getElementById('result').style.color='green';
+        }
+        else
+        {
+            document.getElementById('result').innerHTML="You Lose!";
+            document.getElementById('result').style.color='red';
+        }
+    </script>
+</body>
+</html>

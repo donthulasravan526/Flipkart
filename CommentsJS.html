@@ -38,13 +38,13 @@
     var save=document.getElementById('save');
     var reviews=document.getElementById('reviews');
     show();
-    var flag=false; var unique=0;
+    var flag=false; var unique=0;var f;
     function formSubmit(){
         event.preventDefault();
         var user=document.getElementById('user').value;
         var cmnt=document.getElementById('cmnt').value; var date=new Date(); var min=date.getMinutes();
         if(min<10){ min="0"+min; }
-        var ctime=date.getDay()+"/"+(date.getMonth()+1)+"/"+date.getFullYear()+" "+date.getHours()+":"+min;
+        var ctime=date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear()+" "+date.getHours()+":"+min;
         var likeValue=0;
         if(user==""||cmnt=="")
         {
@@ -62,15 +62,11 @@
         {
             for(i=0;i<get.length;i++)
             {
-                if(get[i].uname==user && i==unique)
+                if(i==unique)
                 {
-                    if(get[i].like==1){document.getElementById('like'+i).style.display='none';document.getElementById('liked'+i).style.display='inline-block';likeValue=1;}
-                    if(get[i].like==2){document.getElementById('like'+i).style.display='none';document.getElementById('liked'+i).style.display='inline-block';document.getElementById('emo1'+i).style.display='inline-block';likeValue=2;}
-                    if(get[i].like==3){document.getElementById('like'+i).style.display='none';document.getElementById('liked'+i).style.display='inline-block';document.getElementById('emo2'+i).style.display='inline-block';likeValue=3;}
-                    var userinfo={uname:user,comm:cmnt,time:ctime,like:likeValue}
+                    var userinfo={uname:user,comm:cmnt,time:ctime,like:get[i].like}
                     get.splice(i,1,userinfo);
                     set();
-                    reviews.deleteRow(i);
                     flag=false;
                 }
             }
@@ -87,9 +83,7 @@
         for(i=0;i<get.length;i++)
         {
             reviews.innerHTML=reviews.innerHTML+"<tr><td><b>"+get[i].uname+"</b>: "+get[i].comm+"</td><td><span onmouseover='mouseover("+i+")' onmouseout='mouseout("+i+")'><button class='like' id='like"+i+"' onclick='like("+i+")'>Like</button><button class='liked' id='liked"+i+"' onclick='disliked("+i+")'>Liked</button>&nbsp;<span onclick='emo1("+i+") 'id='emo1"+i+"' class='emoji'>&#128512;</span><span onclick='emo2("+i+")' id='emo2"+i+"' class='emoji'>&#128540;</span></span></td><td>"+get[i].time+"</td><td><button onclick='del("+i+")'>Del</button>&nbsp;&nbsp;<button onclick='edit("+i+")'>Edit</button></td></tr>";
-            if(get[i].like==1){document.getElementById('like'+i).style.display='none';document.getElementById('liked'+i).style.display='inline-block';}
-            if(get[i].like==2){document.getElementById('like'+i).style.display='none';document.getElementById('liked'+i).style.display='inline-block';document.getElementById('emo1'+i).style.display='inline-block';}
-            if(get[i].like==3){document.getElementById('like'+i).style.display='none';document.getElementById('liked'+i).style.display='inline-block';document.getElementById('emo2'+i).style.display='inline-block';}
+            f="show";emoji(i,f);
         }
         userid.value="";cmntid.value="";
         userid.disabled=false;
@@ -97,39 +91,61 @@
         save.style.display='none';
     }
     function mouseover(i){
-        document.getElementById('emo1'+i).style.display='inline-block';document.getElementById('emo2'+i).style.display='inline-block';
+        f="mover";emoji(i,f);
     }
     function mouseout(i){
-        if(get[i].like==0||get[i].like==1){ document.getElementById('emo1'+i).style.display='none';document.getElementById('emo2'+i).style.display='none';}
-        if(get[i].like==2){document.getElementById('emo2'+i).style.display='none';}
-        if(get[i].like==3){document.getElementById('emo1'+i).style.display='none';}
+        f="mout";emoji(i,f);
     }
     function like(i){
-        document.getElementById('like'+i).style.display='none';document.getElementById('liked'+i).style.display='inline-block';
-        likeValue=1;
-        var userinfo={uname:get[i].uname,comm:get[i].comm,time:get[i].time,like:likeValue}
-        get.splice(i,1,userinfo);
-        set();
+        f="like";emoji(i,f);
     }
     function disliked(i){
-        document.getElementById('like'+i).style.display='inline-block';document.getElementById('liked'+i).style.display='none';
-        likeValue=0;
-        var userinfo={uname:get[i].uname,comm:get[i].comm,time:get[i].time,like:likeValue}
-        get.splice(i,1,userinfo);
-        set();
+        f="dislike";emoji(i,f);
     }
     function emo1(i){
-        
-        document.getElementById('like'+i).style.display='none';document.getElementById('liked'+i).style.display='inline-block';document.getElementById('emo1'+i).style.display='inline-block';document.getElementById('emo2'+i).style.display='none';
-        likeValue=2;
-        var userinfo={uname:get[i].uname,comm:get[i].comm,time:get[i].time,like:likeValue}
-        get.splice(i,1,userinfo);
-        set();
+        f="emo1";emoji(i,f);
     }
     function emo2(i){
-        
-        document.getElementById('like'+i).style.display='none';document.getElementById('liked'+i).style.display='inline-block';document.getElementById('emo1'+i).style.display='none';document.getElementById('emo2'+i).style.display='inline-block';
-        likeValue=3;
+        f="emo2";emoji(i,f);
+    }
+    function emoji(i,f){
+        var like=document.getElementById('like'+i);var liked=document.getElementById('liked'+i);var emo1=document.getElementById('emo1'+i);var emo2=document.getElementById('emo2'+i);
+        if(f=="show"){
+            if(get[i].like==1){like.style.display='none';liked.style.display='inline-block';}
+            if(get[i].like==2){like.style.display='none';liked.style.display='inline-block';emo1.style.display='inline-block';}
+            if(get[i].like==3){like.style.display='none';liked.style.display='inline-block';emo2.style.display='inline-block';}
+            }
+        if(f=="mover"){
+            emo1.style.display='inline-block';emo2.style.display='inline-block';
+            }
+        if(f=="mout"){
+            if(get[i].like==0||get[i].like==1){ emo1.style.display='none';emo2.style.display='none';}
+            if(get[i].like==2){emo2.style.display='none';}
+            if(get[i].like==3){emo1.style.display='none';}
+            }
+        if(f=="like"){
+            like.style.display='none';liked.style.display='inline-block';
+            likeValue=1;
+            userinfo(i);
+            }
+        if(f=="dislike"){
+            like.style.display='inline-block';liked.style.display='none';
+            likeValue=0;
+            userinfo(i);
+            }
+        if(f=="emo1"){
+            like.style.display='none';liked.style.display='inline-block';emo1.style.display='inline-block';emo2.style.display='none';
+            likeValue=2;
+            userinfo(i);
+            }
+        if(f=="emo2"){
+            like.style.display='none';liked.style.display='inline-block';emo1.style.display='none';emo2.style.display='inline-block';
+            likeValue=3;
+            userinfo(i);
+            }
+
+    }
+    function userinfo(i){
         var userinfo={uname:get[i].uname,comm:get[i].comm,time:get[i].time,like:likeValue}
         get.splice(i,1,userinfo);
         set();
