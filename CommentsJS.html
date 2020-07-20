@@ -30,6 +30,7 @@
     var commentarray=[];
     if(localStorage.getItem("commentJS")==null){localStorage.setItem("commentJS",JSON.stringify(commentarray));}
     var get=JSON.parse(localStorage.getItem('commentJS'));
+    function set(){localStorage.setItem('commentJS',JSON.stringify(get));}
     var form=document.getElementsByName('form');
     var userid=document.getElementById('user');
     var cmntid=document.getElementById('cmnt');
@@ -68,7 +69,7 @@
                     if(get[i].like==3){document.getElementById('like'+i).style.display='none';document.getElementById('liked'+i).style.display='inline-block';document.getElementById('emo2'+i).style.display='inline-block';likeValue=3;}
                     var userinfo={uname:user,comm:cmnt,time:ctime,like:likeValue}
                     get.splice(i,1,userinfo);
-                    localStorage.setItem('commentJS',JSON.stringify(get));
+                    set();
                     reviews.deleteRow(i);
                     flag=false;
                 }
@@ -78,7 +79,7 @@
         {
             var userinfo={uname:user,comm:cmnt,time:ctime,like:likeValue}
             get.push(userinfo);
-            localStorage.setItem('commentJS',JSON.stringify(get));
+            set();
         }
     }
     function show(){
@@ -104,19 +105,18 @@
         if(get[i].like==3){document.getElementById('emo1'+i).style.display='none';}
     }
     function like(i){
-        console.log(emoji());
         document.getElementById('like'+i).style.display='none';document.getElementById('liked'+i).style.display='inline-block';
         likeValue=1;
         var userinfo={uname:get[i].uname,comm:get[i].comm,time:get[i].time,like:likeValue}
         get.splice(i,1,userinfo);
-        localStorage.setItem('commentJS',JSON.stringify(get));
+        set();
     }
     function disliked(i){
         document.getElementById('like'+i).style.display='inline-block';document.getElementById('liked'+i).style.display='none';
         likeValue=0;
         var userinfo={uname:get[i].uname,comm:get[i].comm,time:get[i].time,like:likeValue}
         get.splice(i,1,userinfo);
-        localStorage.setItem('commentJS',JSON.stringify(get));
+        set();
     }
     function emo1(i){
         
@@ -124,7 +124,7 @@
         likeValue=2;
         var userinfo={uname:get[i].uname,comm:get[i].comm,time:get[i].time,like:likeValue}
         get.splice(i,1,userinfo);
-        localStorage.setItem('commentJS',JSON.stringify(get));
+        set();
     }
     function emo2(i){
         
@@ -132,12 +132,12 @@
         likeValue=3;
         var userinfo={uname:get[i].uname,comm:get[i].comm,time:get[i].time,like:likeValue}
         get.splice(i,1,userinfo);
-        localStorage.setItem('commentJS',JSON.stringify(get));
+        set();
     }
     function del(i){
         //var id=i.substr(1);
         get.splice(i,1);
-        localStorage.setItem('commentJS',JSON.stringify(get));
+        set();
         show();
         //reviews.deleteRow(i);
     }

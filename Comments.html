@@ -31,6 +31,7 @@
     var commentarray=[];
     if(localStorage.getItem("comment")==null){localStorage.setItem("comment",JSON.stringify(commentarray));}
     var get=JSON.parse(localStorage.getItem('comment'));
+    function set(){localStorage.setItem('comment',JSON.stringify(get));}
     show();
     var flag=false; var unique=0;
     $("form").submit(function(e){
@@ -62,7 +63,7 @@
                     if(get[i].like==3){$("#like"+i).hide();$("#liked"+i+",#emo2"+i).show();likeValue=3;}
                     var userinfo={uname:user,comm:cmnt,time:ctime,like:likeValue}
                     get.splice(i,1,userinfo);
-                    localStorage.setItem('comment',JSON.stringify(get));
+                    set();
                     flag=false;
                 }
             }
@@ -71,7 +72,7 @@
         {
             var userinfo={uname:user,comm:cmnt,time:ctime,like:likeValue}
             get.push(userinfo);
-            localStorage.setItem('comment',JSON.stringify(get));
+            set();
         }
     }
     function show(){
@@ -103,7 +104,7 @@
         likeValue=1;
         var userinfo={uname:get[i].uname,comm:get[i].comm,time:get[i].time,like:likeValue}
         get.splice(i,1,userinfo);
-        localStorage.setItem('comment',JSON.stringify(get));
+        set();
     }
     function disliked(i){
         $("#liked"+i).hide();
@@ -111,7 +112,7 @@
         likeValue=0;
         var userinfo={uname:get[i].uname,comm:get[i].comm,time:get[i].time,like:likeValue}
         get.splice(i,1,userinfo);
-        localStorage.setItem('comment',JSON.stringify(get));
+        set();
     }
     function emo1(i){
         $("#like"+i+",#emo2"+i).hide();
@@ -119,7 +120,7 @@
         likeValue=2;
         var userinfo={uname:get[i].uname,comm:get[i].comm,time:get[i].time,like:likeValue}
         get.splice(i,1,userinfo);
-        localStorage.setItem('comment',JSON.stringify(get));
+        set();
     }
     function emo2(i){
         $("#like"+i+",#emo1"+i).hide();
@@ -127,12 +128,12 @@
         likeValue=3;
         var userinfo={uname:get[i].uname,comm:get[i].comm,time:get[i].time,like:likeValue}
         get.splice(i,1,userinfo);
-        localStorage.setItem('comment',JSON.stringify(get));
+        set();
     }
     function del(i){
         //var id=i.substr(1);
         get.splice(i,1);
-        localStorage.setItem('comment',JSON.stringify(get));
+        set();
         show();
     }
     function edit(i){
