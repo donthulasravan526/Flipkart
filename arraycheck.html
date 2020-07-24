@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+    body{font-family: sans-serif;background-color: darkslategray;}
+    div#form{
+        margin:auto;
+        margin-top: 10%;
+        border: 1px solid black;
+        text-align: center;
+        background-color: whitesmoke;
+        width: 300px;
+    }
+    div#form div:not(#input) input{
+        width: 250px;
+        height: 20px;
+    }
+    div#form div
+    {
+        height: 40px;
+    }
+    span{
+        font-size: 0.5em;
+    }
+    </style>
+    <title>Login Form</title>
+</head>
+<body>
+    <div id="form">
+        <div><h2>Signup</h2></div>
+        <div><input type="text" id="user" placeholder="Username" /><br><span id="euser"></span></div>
+        <div><input type="number" id="mnum" placeholder="Mobile Number" /><br/><span id="emnum"></span></div>
+        <div><input type="email" id="email" placeholder="Email Address" /><span id="ermail"></span></div>
+        <div><input type="password" id="pass" placeholder="Password" /><br/><span id="epass"></span></div>
+        <div id="input"><button id="reset">Reset</button>&nbsp;&nbsp;<input type="Submit" id="submit" value="Submit" onsubmit="submit()" /></div>
+    </div>
+   <script>
+       var ar=[];
+       if(localStorage.getItem('formarray')==null){localStorage.setItem('formarray',JSON.stringify(ar));}
+       $("#reset").on('keyup click', function(){
+           event.preventDefault();
+           console.log("entered");
+           var input=$("#form").find('input');
+           for(i=0;i<input.length;i++){
+               var id=input[i].getAttribute('id');
+               if(id!="submit")
+               {
+                   $("#"+id).val("");
+               }
+           }
+       });
+   </script> 
+</body>
+</html>
