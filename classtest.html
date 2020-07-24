@@ -1,0 +1,100 @@
+<html>
+
+ <head>
+
+    <style>
+    
+    span{
+        color: red
+    }
+    </style>
+
+ </head>
+
+  <body>
+
+
+     <form>
+         Product ID:<input type="text" id="pid"> <span id="pid_msg"></span> <br><br>
+         Product Name: <input type="text" id="pname"> <span id="pname_msg"></span><br><br>
+         Price: <input type="text" id="price"> <span id="price_msg"></span><br><br>
+         Category: <input type="text" id="cat"> <span id="cat_msg"></span><br><br>
+         Seller: <input type="text" id="seller"> <span id="seller_msg"></span><br><br>
+         <button onclick="validate()">Submit</button>
+     </form>
+<script>
+      
+               var pids=[1,2,3,4,5,6,7];
+               var pnames=['p1','p2','p3'];
+
+              function validate(){
+                  event.preventDefault();
+                var span=document.getElementsByTagName('span');
+               var pid=getValueById('pid');
+               var pname=getValueById('pname');
+               var price =getValueById('price');
+               console.log(isNaN(price));
+               if(isNaN(price)){
+                updateInnerHTML('price_msg',"Please enter a numeric value");
+               }
+               else
+               {
+                updateInnerHTML('price_msg',"");
+               }
+                 var pidChk=checkForUnique(parseInt(pid),pids);
+                 console.log(pid);
+                 if(isNaN(pid))
+                 {
+                    updateInnerHTML('pid_msg',"Please enter a numeric value");
+                 }
+                 else if(pidChk == true)
+                 {
+                    updateInnerHTML('pid_msg',"This product ID is already taken");
+                 }
+                else                 
+                {
+                    if(!(isNaN(pid)) && pid.length!=0){
+                        updateInnerHTML('pid_msg',"This PID is available");
+                    }
+                    else
+                    {
+                        updateInnerHTML('pid_msg',"");
+                    }
+                   
+                }
+                 var pnameChk=checkForUnique(pname,pnames);
+                  if(pnameChk == true){
+                    updateInnerHTML('pname_msg',"This product name is already registered");
+                    
+                  }
+                  else
+                  {
+                    if(pname.length!=0){
+                        updateInnerHTML('pname_msg',"This product name is available");
+                    }
+                    else
+                    {
+                        updateInnerHTML('pname_msg',"");
+                    }
+                   
+                  }
+                function getValueById(id){
+                      return document.getElementById(id).value;
+                   }
+
+                   function checkForUnique(key,arrayName){
+                       return arrayName.includes(key);
+                   }
+
+                  function updateInnerHTML(id,content){
+                        document.getElementById(id).innerHTML=content;
+                  }
+
+
+              }
+      
+      </script>
+
+  </body>
+
+</html>

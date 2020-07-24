@@ -31,10 +31,10 @@
 <body>
     <div id="form">
         <div><h2>Signup</h2></div>
-        <div><input type="text" id="user" placeholder="Username" /><br><span id="euser"></span></div>
-        <div><input type="number" id="mnum" placeholder="Mobile Number" /><br/><span id="emnum"></span></div>
-        <div><input type="email" id="email" placeholder="Email Address" /><span id="ermail"></span></div>
-        <div><input type="password" id="pass" placeholder="Password" /><br/><span id="epass"></span></div>
+        <div><input type="text" id="user" placeholder="Username" onchange="error()" /><br><span id="euser"></span></div>
+        <div><input type="number" id="mnum" placeholder="Mobile Number" onchange="error()" //><br/><span id="emnum"></span></div>
+        <div><input type="email" id="email" placeholder="Email Address" onchange="error()" //><span id="ermail"></span></div>
+        <div><input type="password" id="pass" placeholder="Password" onchange="error()" //><br/><span id="epass"></span></div>
         <div id="input"><button id="reset">Reset</button>&nbsp;&nbsp;<input type="Submit" id="submit" value="Submit" onsubmit="submit()" /></div>
     </div>
    <script>
@@ -52,6 +52,7 @@
                }
            }
        });
+     function   
    </script> 
 </body>
 </html>
