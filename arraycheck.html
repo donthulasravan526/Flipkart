@@ -6,25 +6,30 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
     body{font-family: sans-serif;background-color: darkslategray;}
-    div#form{
+    div#form, div#tooltip{
         margin:auto;
-        margin-top: 10%;
         border: 1px solid black;
         text-align: center;
         background-color: whitesmoke;
         width: 300px;
     }
+    div#form
+    {
+        margin-top: 10%;
+    }
+    div#tooltip{display: none;}
     div#form div:not(#input) input{
         width: 250px;
         height: 20px;
     }
-    div#form div:not(#uerror)
+    div#form div
     {
         height: 45px;
     }
     span{
         font-size: 0.6em;
         color: red;
+        text-align: left;
     }
     #hover
     {
@@ -35,23 +40,29 @@
     <title>Login Form</title>
 </head>
 <body>
-    <form onsubmit="submit()">
-        <div id="form">
+    <div id="form">
         <div><h2>Signup</h2></div>
-        <div><input type="text" id="user" placeholder="Username" oninput="input('user')"/><span id="euser"></span></div>
-        <div><input type="number" id="mnum" placeholder="Mobile Number" oninput="input('mnum')"/><span id="emnum"></span></div>
-        <div><input type="email" id="email" placeholder="Email Address" oninput="input('email')"/><span id="ermail"></span></div>
-        <div><input type="password" id="pass" placeholder="Password" oninput="input('epass')" /><span id="epass"></span></div>
-        <div id="input"><button id="reset">Reset</button>&nbsp;&nbsp;<input type="Submit" id="submit" value="Submit" onclick="submit()" />&nbsp;&nbsp;<a href="#" title="Your password should contain minimum eight characters, at least one letter, one number and one special character" id="hover">Password Policy</a><br>
+        <div><input type="text" id="user" placeholder="Username" oninput="input('user')"/><br><span id="euser"></span></div>
+        <div><input type="number" id="mnum" placeholder="Mobile Number" oninput="input('mnum')"/><br><span id="emnum"></span></div>
+        <div><input type="email" id="email" placeholder="Email Address" oninput="input('email')"/><br><span id="ermail"></span></div>
+        <div><input type="password" id="pass" placeholder="Password" oninput="input('epass')" /><br><span id="epass"></span></div>
+        <div id="input"><button id="reset">Reset</button>&nbsp;&nbsp;<input type="Submit" id="submit" value="Submit" onclick="submit()" />&nbsp;&nbsp;<a href="#" title="" id="hover">Password Policy</a><br>
             <span id="allerror"></span></div>
-        </div>
-    </form>
+    </div>
+    <div id="tooltip">
+        <p style="color: green;font-size: 0.8em;">Your password should contain minimum eight characters, at least one caps letter, one small letter, one number and one special character</p>
+    </div>
    <script>
     $('input').attr('autocomplete', 'off');
     var ar=[];
     if(localStorage.getItem('userarray')==null){localStorage.setItem('userarray',JSON.stringify(ar));}
     var get=JSON.parse(localStorage.getItem('userarray'));
-    var flag=true;
+    $("#hover").mouseover(function () { 
+        $("#tooltip").css("display", "block");
+        
+    }).mouseout(function(){
+        $("#tooltip").css("display", "none");
+    });
     $("#reset").on('keyup click', function(){
         event.preventDefault();
         console.log("entered");
@@ -67,7 +78,7 @@
     function input(val){
         if(val=="user" && $("#user").val()!="")
         {
-            $("#euser,#allerror").html("u");
+            $("#euser,#allerror").html("");
         }
         if(val=="mnum" && $("#mnum").val()!="")
         {
@@ -83,65 +94,62 @@
         }
     }
     function submit(){
-        console.log(flag);
         event.preventDefault();
+        $("#euser,#emnum,#ermail,#epass,#allerror").html("");
         var u=$.trim($("#user").val());
         var m=$.trim($("#mnum").val());
         var e=$.trim($("#email").val());
         var p=$.trim($("#pass").val());
         var ereg = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/igm;
-        var preg="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$";
-        if(flag)
+        var preg= /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+        var flag=true;
+        if(u=="" || m=="" || e=="" || p=="")
         {
-            console.log(u);
-            flag=false;
-            if(u=="" || m=="" || e=="" || p=="")
-            {
-                $("#allerror").html("Please enter all the fields.");
-                flag=true;
-            }
-            else if(m.length<10 || m.length>10)
-            {
-                $("#epass").html("Please provide valid mobilenumber.");
-                flag=true;
-            }
-            else if(e!="" && !ereg.test(e))
-            {
-                $("#ermail").html("Please provide valid email-id.");
-                flag=true;
-            }
-            else if(p!="" && !preg.test(p))
-            {
-                $("#ermail").html("Your password does not match our policy. Please update your password.");
-                flag=true;
-            }
-        }        
-        else if(!flag && get.length>0)
+            $("#allerror").html("Please enter all the fields.");
+        }
+        else if((m.length<10 || m.length>10 || isNaN(m)) && m!="")
         {
-            for(i=0;i<get.length;i++)
-            {
-                if(u!="" && get[i].uname==u)
-                {
-                    $("#euser").html("Username already exists.");
-                }
-                if(m!="" && get[i].mobile==m)
-                {
-                    $("#emnum").html("Mobile number already exists.");
-                }
-                if(e!="" && get[i].email==m)
-                {
-                    $("#emnum").html("Email-ID already exists.");
-                }
-            }
-
+            $("#emnum").html("Please provide valid mobilenumber.");
+        }
+        else if(e!="" && !ereg.test(e))
+        {
+            $("#ermail").html("Please provide valid email-id.");
+        }
+        else if(p!="" && !preg.test(p))
+        {
+            $("#epass").html("Your password does not match our policy.");
         }
         else
         {
-            var userinfo={uname:u,mobile:m,email:e,password:p}
-            get.push(userinfo);
-            localStorage.setItem('userarray',JSON.stringify(get));
-            flag=false;
-            window.location.href="usersuccess.html";
+            if(get.length>0)
+            {
+                for(i=0;i<get.length;i++)
+                {
+                    if(u!="" && get[i].uname==u)
+                    {
+                        $("#euser").html("Username already exists.");
+                        flag=false;
+                    }
+                    if(m!="" && get[i].mobile==m)
+                    {
+                        $("#emnum").html("Mobile number already exists.");
+                        flag=false;
+                    }
+                    if(e!="" && get[i].email==e)
+                    {
+                        $("#ermail").html("Email-ID already exists.");
+                        flag=false;
+                    }
+                }
+            }
+            if(flag)
+            {
+                var userinfo={uname:u,mobile:m,email:e,password:p}
+                get.push(userinfo);
+                localStorage.setItem('userarray',JSON.stringify(get));
+                window.location.href="usersuccess.html";
+            }
+
         }
     }  
    </script> 
