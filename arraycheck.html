@@ -36,6 +36,7 @@
         font-size: 0.6em;
     }
     #allerror{height: 16px;}
+    .inputborder{border: 0.5px solid red;}
     </style>
     <title>Login Form</title>
 </head>
@@ -45,12 +46,12 @@
         <div><input type="text" id="user" placeholder="Username" oninput="input('user')"/><br><span id="euser"></span></div>
         <div><input type="number" id="mnum" placeholder="Mobile Number" oninput="input('mnum')"/><br><span id="emnum"></span></div>
         <div><input type="email" id="email" placeholder="Email Address" oninput="input('email')"/><br><span id="ermail"></span></div>
-        <div><input type="password" id="pass" placeholder="Password" oninput="input('epass')" /><br><span id="epass"></span></div>
+        <div><input type="password" id="pass" placeholder="Password" oninput="input('pass')" /><br><span id="epass"></span></div>
         <div id="input"><button id="reset">Reset</button>&nbsp;&nbsp;<input type="Submit" id="submit" value="Submit" onclick="submit()" />&nbsp;&nbsp;<a href="#" title="" id="hover">Password Policy</a><br>
             <span id="allerror"></span></div>
     </div>
     <div id="tooltip">
-        <p style="color: green;font-size: 0.8em;">Your password should contain minimum eight characters, at least one caps letter, one small letter, one number and one special character</p>
+        <span style="color: rgb(116, 44, 116);">Your password should contain minimum eight characters, at least one caps letter, one small letter, one number and one special character</span><br>
     </div>
    <script>
     $('input').attr('autocomplete', 'off');
@@ -65,32 +66,38 @@
     });
     $("#reset").on('keyup click', function(){
         event.preventDefault();
-        console.log("entered");
+        $("#euser,#emnum,#ermail,#epass,#allerror").html("");
         var input=$("#form").find('input');
         for(i=0;i<input.length;i++){
             var id=input[i].getAttribute('id');
             if(id!="submit")
             {
-                $("#"+id).val("");
+                $("#"+id).val("").removeClass("inputborder");
             }
         }
     });
     function input(val){
+        console.log(val);
+        $("#"+val).css("border","1px solid lightskyblue");
         if(val=="user" && $("#user").val()!="")
         {
             $("#euser,#allerror").html("");
+            $("#user").removeClass("inputborder");
         }
         if(val=="mnum" && $("#mnum").val()!="")
         {
             $("#emnum,#allerror").html("");
+            $("#mnum").removeClass("inputborder");
         }
         if(val=="email" && $("#email").val()!="")
         {
             $("#ermail,#allerror").html("");
+            $("#email").removeClass("inputborder");
         }
         if(val=="pass" && $("#pass").val()!="")
         {
             $("#epass,#allerror").html("");
+            $("#pass").removeClass("inputborder");
         }
     }
     function submit(){
@@ -106,18 +113,29 @@
         if(u=="" || m=="" || e=="" || p=="")
         {
             $("#allerror").html("Please enter all the fields.");
+            var input=$("#form").find('input');
+            for(i=0;i<input.length;i++){
+                var id=input[i].getAttribute('id');
+                if(id!="submit" && $("#"+id).val()=="")
+                {
+                    $("#"+id).addClass("inputborder");
+                }
+            }
         }
         else if((m.length<10 || m.length>10 || isNaN(m)) && m!="")
         {
             $("#emnum").html("Please provide valid mobilenumber.");
+            $("#mnum").addClass("inputborder");
         }
         else if(e!="" && !ereg.test(e))
         {
             $("#ermail").html("Please provide valid email-id.");
+            $("#email").addClass("inputborder");
         }
         else if(p!="" && !preg.test(p))
         {
             $("#epass").html("Your password does not match our policy.");
+            $("#pass").addClass("inputborder");
         }
         else
         {
@@ -128,16 +146,19 @@
                     if(u!="" && get[i].uname==u)
                     {
                         $("#euser").html("Username already exists.");
+                        $("#user").addClass("inputborder");
                         flag=false;
                     }
                     if(m!="" && get[i].mobile==m)
                     {
                         $("#emnum").html("Mobile number already exists.");
+                        $("#mnum").addClass("inputborder");
                         flag=false;
                     }
                     if(e!="" && get[i].email==e)
                     {
                         $("#ermail").html("Email-ID already exists.");
+                        $("#email").addClass("inputborder");
                         flag=false;
                     }
                 }
