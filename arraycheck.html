@@ -22,6 +22,7 @@
         width: 250px;
         height: 20px;
     }
+    input:focus{outline: 1px solid skyblue;}
     div#form div
     {
         height: 45px;
@@ -36,7 +37,7 @@
         font-size: 0.6em;
     }
     #allerror{height: 16px;}
-    .inputborder{border: 0.5px solid red;}
+    .inputborder{outline-color: red; outline-style: auto;}
     </style>
     <title>Login Form</title>
 </head>
@@ -44,14 +45,14 @@
     <div id="form">
         <div><h2>Signup</h2></div>
         <div><input type="text" id="user" placeholder="Username" oninput="input('user')"/><br><span id="euser"></span></div>
-        <div><input type="number" id="mnum" placeholder="Mobile Number" oninput="input('mnum')"/><br><span id="emnum"></span></div>
+        <div><input type="text" id="mnum" placeholder="Mobile Number" oninput="input('mnum')"/><br><span id="emnum"></span></div>
         <div><input type="email" id="email" placeholder="Email Address" oninput="input('email')"/><br><span id="ermail"></span></div>
         <div><input type="password" id="pass" placeholder="Password" oninput="input('pass')" /><br><span id="epass"></span></div>
         <div id="input"><button id="reset">Reset</button>&nbsp;&nbsp;<input type="Submit" id="submit" value="Submit" onclick="submit()" />&nbsp;&nbsp;<a href="#" title="" id="hover">Password Policy</a><br>
             <span id="allerror"></span></div>
     </div>
     <div id="tooltip">
-        <span style="color: rgb(116, 44, 116);">Your password should contain minimum eight characters, at least one caps letter, one small letter, one number and one special character</span><br>
+        <span style="color: rgb(116, 44, 116);">Your password should contain minimum eight characters, at least one caps letter, one small letter, one number and one special character</span>
     </div>
    <script>
     $('input').attr('autocomplete', 'off');
@@ -77,24 +78,26 @@
         }
     });
     function input(val){
-        console.log(val);
-        $("#"+val).css("border","1px solid lightskyblue");
-        if(val=="user" && $("#user").val()!="")
+        var u=$.trim($("#user").val());
+        var m=$.trim($("#mnum").val());
+        var e=$.trim($("#email").val());
+        var p=$.trim($("#pass").val());
+        if(val=="user" && u!="")
         {
             $("#euser,#allerror").html("");
             $("#user").removeClass("inputborder");
         }
-        if(val=="mnum" && $("#mnum").val()!="")
+        if(val=="mnum" && m!="")
         {
             $("#emnum,#allerror").html("");
             $("#mnum").removeClass("inputborder");
         }
-        if(val=="email" && $("#email").val()!="")
+        if(val=="email" && e!="")
         {
             $("#ermail,#allerror").html("");
             $("#email").removeClass("inputborder");
         }
-        if(val=="pass" && $("#pass").val()!="")
+        if(val=="pass" && p!="")
         {
             $("#epass,#allerror").html("");
             $("#pass").removeClass("inputborder");
