@@ -21,7 +21,7 @@
     <div id="cityimages">
         <label>Please select your city:&nbsp;&nbsp;</label>
         <select name="city" id="city">
-            <!--<option value="0" style="cursor:none;">Please select</option>
+            <option value="0" style="cursor:none;" disabled='disabled'>Please select</option>
             <option value="1" data-img="Cities/Delhi.jpg">Delhi</option>
             <option value="2">Mumbai</option>
             <option value="3">Hyderabad</option>
@@ -30,21 +30,10 @@
             <option value="6">Agra</option>
             <option value="7">Kolkata</option>
             <option value="8">Trivandrum</option>
-            <option value="9">Display all Cities</option>-->
+            <option value="9">Display all Cities</option>
         </select>
         <br/><br/>
     </div>
-    <script>
-        var obj= {
-            src: ["","Cities/Delhi.jpg","Cities/Mumbai.jpg","Cities/Hyderabad.jpg","Cities/Bangalore.jpg","Cities/Chennai.jpg","Cities/Agra.jpg","Cities/Kolkata.jpg","Cities/Trivandrum.png",""],
-            names: ["Please select","Delhi","Mumbai","Hyderabad","Bangalore","Chennai","Agra","Kolkata","Trivandrum","Display all Cities"]
-        }
-        //$("#city").append("<option>"+obj.names[0]+"</option>");
-        for(var i=0;i<=9;i++)
-        {
-            $("#city").append("<option value='"+i+"'><img src='"+obj.src[i]+"' />&nbsp;"+obj.names[i]+"</option>");
-        }
-    </script>
     <div id="citynames">
         <table align="center" id="dropdown_table">
             <tr>

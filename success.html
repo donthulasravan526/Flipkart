@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script type="text/javascript" src="validation.js"></script>
     <title>Success</title>
     <style>
         body{font-family: Arial, Helvetica, sans-serif;}
@@ -12,5 +11,9 @@
 </head>
 <body>
     <div id="success" style="text-align: center;"><span style="color:black;font-size: 2em;"></span></div>
+    <script>
+    var localValue=localStorage.getItem('answer');
+    $("#success").find('span').html("Thank you! You have selected <font color='green'>"+localValue+"</font> and it is submitted successfully.");
+    </script>
 </body>
 </html>

@@ -1,0 +1,59 @@
+<!DOCtype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="dropdown.js"></script>
+    <title>Images Drop-down</title>
+    <style>
+        body{font-family: Arial, Helvetica, sans-serif; margin-top: 50px;}
+        #cityimages{text-align: center;}
+        td{padding: 10px;font-size: 0.9em;}
+        .pointer{cursor: pointer;}
+       #citynames{display: none;}.block{display: block;}
+        .border{border: 1px solid red;}
+    </style>
+</head>
+<body>
+    <!--<div id="success" style="text-align: center;"><span style="color:black;font-size: 2em;"></span></div>-->
+    <div id="cityimages">
+        <label>Please select your city:&nbsp;&nbsp;</label>
+        <select name="city" id="city">
+        </select>
+    </div>
+        <br/>
+        <div id="citynames">
+            <table align="center" id="dropdown_table"></table>
+        </div><br/>
+        <div id="next" align="center">
+            <button id="submitcity">Submit</button>&nbsp;
+            <button id="resetcity">Reset</button>
+        </div>
+    <script>
+        var i,j;
+        console.log('entered');
+        var obj1= {
+            src: ["","Cities/Delhi.jpg","Cities/Mumbai.jpg","Cities/Hyderabad.jpg","Cities/Bangalore.jpg","Cities/Chennai.jpg","Cities/Agra.jpg","Cities/Kolkata.jpg","Cities/Trivandrum.png",""],
+            names: ["Please select","Delhi","Mumbai","Hyderabad","Bangalore","Chennai","Agra","Kolkata","Trivandrum","Display all Cities"]
+        }
+        var obj2={
+            city: ["Agra, Uttar Pradesh","Ahmedabad, Gujarat","Ajmer, Rajasthan","Aligarh, Uttar Pradesh","Allahabad, Uttar Pradesh","Ambattur, Tamil Nadu","Amravati, Maharashtra","Amritsar, Punjab","Asansol, West Bengal","Aurangabad, Maharashtra","Bangalore, Karnataka","Bareilly, Uttar Pradesh","Belgaum, Karnataka","Bhavnagar, Gujarat","Bhilai Nagar, Chhattisgarh","Bhiwandi, Maharashtra","Bhopal, Madhya Pradesh","Bhubaneswar, Orissa","Bikaner, Rajasthan","Chandigarh, Punjab","Chennai, Tamil Nadu","Coimbatore, Tamil Nadu","Cuttack, Orissa","Dehradun, Uttarakhand","Delhi, Delhi","Dhanbad, Jharkhand","Durgapur, West Bengal","Faridabad, Haryana","Firozabad, Uttar Pradesh","Gaya, Bihar","Ghaziabad, Uttar Pradesh","Gorakhpur, Uttar Pradesh","Gulbarga, Karnataka","Guntur, Seemandhra","Gurgaon, Haryana","Guwahati, Assam","Gwalior, Madhya Pradesh","Haora, West Bengal","Hubli and Dharwad, Karnataka","Hyderabad, Telangana","Indore, Madhya Pradesh","Jabalpur, Maharashtra","Jaipur, Rajasthan","Jalandhar, Punjab","Jalgaon, Maharashtra","Jammu, Jammu & Kashmir","Jamnagar, Gujarat","Jamshedpur, Jharkhand","Jhansi, Uttar Pradesh","Jodhpur, Rajasthan","Kalyan & Dombivali, Maharashtra","Kanpur, Uttar Pradesh","Kochi, Kerala","Kolapur, Maharashtra","Kolkata, West Bengal","Kota, Rajasthan","Loni, Uttar Pradesh","Lucknow, Uttar Pradesh","Ludhiana, Punjab","Madurai, Tamil Nadu","Maheshtala, West Bengal","Malegoan, Maharashtra","Mangalore, Karnataka","Meerut, Uttar Pradesh","Mira and Bhayander, Maharashtra","Moradabad, Uttar Pradesh","Mumbai, Maharashtra","Mysore, Karnataka","Nagpur, Maharashtra","Nanded Waghala, Maharashtra","Nashik, Maharashtra","Navi Mumbai, Maharashtra","Nellore, Seemandhra","Noida, Uttar Pradesh","Patna, Bihar","Pimpri & Chinchwad, Maharashtra","Pune, Maharashtra","Raipur, Chhattisgarh","Rajkot, Gujarat","Ranchi, Jharkhand","Saharanpur, Uttar Pradesh","Salem, Tamil Nadu","Sangli Miraj Kupwad, Maharashtra","Siliguri, West Bengal","Solapur, Maharashtra","Srinagar, Jammu & Kashmir","Surat, Gujarat","Thane, Maharashtra","Thiruvananthapuram, Kerala","Tiruchirappalli, Tamil Nadu","Tirunelveli, Tamil Nadu","Udaipur, Rajasthan","Ujjain, Madhya Pradesh","Ulhasnagar, Maharashtra","Vadodara, Gujarat","Varanasi, Uttar Pradesh","Vasai Virar, Maharashtra","Vijayawada, Seemandhra","Visakhapatnam, Seemandhra","Warangal, Telangana"]
+        }
+        //$("#city").append("<option>"+obj.names[0]+"</option>");
+        for(i=0;i<obj1.src.length;i++)
+        {
+            console.log(i);
+            $("#city").append("<option value='"+i+"'><img src='"+obj1.src[i]+"' />&nbsp;"+obj1.names[i]+"</option>");
+        }
+        for(i=0;i<obj2.city.length;i++)
+        {
+            j=(i+4)%4;
+            if(j==0)
+            {
+            $("#dropdown_table").append("<tr><td><input type='radio' name='cityradio' value='"+(i+1)+"'>&nbsp;<label>"+obj2.city[i]+"</label></td><td><input type='radio' name='cityradio' value='"+(i+2)+"'>&nbsp;<label>"+obj2.city[i+1]+"</label></td><td><input type='radio' name='cityradio' value='"+(i+3)+"'>&nbsp;<label>"+obj2.city[i+2]+"</label></td><td><input type='radio' name='cityradio' value='"+(i+4)+"'>&nbsp;<label>"+obj2.city[i+3]+"</label></td></tr>");
+            }
+        }
+    </script>
+</body>
+</html>
