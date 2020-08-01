@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+    body{font-family: sans-serif;background-color: darkslategray;}
+    div#form, div#tooltip{
+        margin:auto;
+        border: 1px solid black;
+        text-align: center;
+        background-color: whitesmoke;
+        width: 300px;
+    }
+    div#form
+    {
+        margin-top: 10%;
+    }
+    div#tooltip{display: none;}
+    div#form div:not(#input) input{
+        width: 250px;
+        height: 20px;
+    }
+    input:focus{outline: 1px solid skyblue;}
+    div#form div
+    {
+        height: 45px;
+    }
+    span{
+        font-size: 0.6em;
+        color: red;
+        text-align: left;
+    }
+    #hover
+    {
+        font-size: 0.6em;
+    }
+    #allerror{height: 16px;}
+    .inputborder{outline-color: red; outline-style: auto;}
+    </style>
+    <title>Login Form</title>
+</head>
+<body>
+    <div id="form">
+        <div><h2>Signup</h2></div>
+        <div><input type="text" id="user" placeholder="Username" oninput="input('user')"/><br><span id="euser"></span></div>
+        <div><input type="text" id="mnum" placeholder="Mobile Number" oninput="input('mnum')"/><br><span id="emnum"></span></div>
+        <div><input type="email" id="email" placeholder="Email Address" oninput="input('email')"/><br><span id="ermail"></span></div>
+        <div><input type="password" id="pass" placeholder="Password" oninput="input('pass')" /><br><span id="epass"></span></div>
+        <div id="input"><button id="reset">Reset</button>&nbsp;&nbsp;<input type="Submit" id="submit" value="Submit" onclick="submit()" />&nbsp;&nbsp;<a href="#" title="" id="hover">Password Policy</a><br>
+            <span id="allerror"></span></div>
+    </div>
+    <div id="tooltip">
+        <span style="color: rgb(116, 44, 116);">Your password should contain minimum eight characters, at least one caps letter, one small letter, one number and one special character</span>
+    </div>
+   <script>
+        var arr=[];
+        if(localStorage.getItem('constarray')==null){localStorage.setItem('constarray',JSON.stringify(arr));}
+        var get=JSON.parse(localStorage.getItem('constarray'));
+        function Employee(user,mobile,email_id,password)
+        {
+            this.username=user;
+            this.mobile=mobile;
+            this.email=email_id;
+            this.pass=password;
+        }
+        function submit(){
+            var u=document.getElementById('user').value;
+            var m=document.getElementById('mnum').value;
+            var e=document.getElementById('email').value;
+            var p=document.getElementById('pass').value;
+            var c =Employee.prototype.sra1=function(){
+                return this.mobile;
+            }
+        var emp1=new Employee(u,m,e,p);
+        console.log(c);
+        get.push(emp1);
+        localStorage.setItem('constarray',JSON.stringify(get));
+        }
+   </script> 
+</body>
+</html>

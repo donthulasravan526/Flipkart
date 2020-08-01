@@ -37,7 +37,7 @@
         font-size: 0.6em;
     }
     #allerror{height: 16px;}
-    .inputborder{outline-color: red; outline-style: auto;}
+    .inputborder{outline-color: red; outline-style:auto;}
     </style>
     <title>Login Form</title>
 </head>
@@ -65,17 +65,16 @@
     }).mouseout(function(){
         $("#tooltip").css("display", "none");
     });
-    $("#reset").on('keyup click', function(){
-        event.preventDefault();
+    $("#reset").on('keyup click', function(e){
+        e.preventDefault();
         $("#euser,#emnum,#ermail,#epass,#allerror").html("");
-        var input=$("#form").find('input');
-        for(i=0;i<input.length;i++){
-            var id=input[i].getAttribute('id');
-            if(id!="submit")
+        $('input').each(function(){
+            var id=$(this).attr('id');
+            if(id!='submit')
             {
                 $("#"+id).val("").removeClass("inputborder");
             }
-        }
+        });
     });
     function input(val){
         var u=$.trim($("#user").val());
@@ -116,14 +115,13 @@
         if(u=="" || m=="" || e=="" || p=="")
         {
             $("#allerror").html("Please enter all the fields.");
-            var input=$("#form").find('input');
-            for(i=0;i<input.length;i++){
-                var id=input[i].getAttribute('id');
+            $('input').each(function(){
+                var id=$(this).attr('id');
                 if(id!="submit" && $("#"+id).val()=="")
                 {
                     $("#"+id).addClass("inputborder");
                 }
-            }
+            });
         }
         else if((m.length<10 || m.length>10 || isNaN(m)) && m!="")
         {
